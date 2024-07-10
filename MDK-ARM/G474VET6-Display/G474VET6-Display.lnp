@@ -1,0 +1,28 @@
+--cpu=Cortex-M4.fp.sp
+"g474vet6-display\startup_stm32g474xx.o"
+"g474vet6-display\lcd.o"
+"g474vet6-display\function.o"
+"g474vet6-display\main.o"
+"g474vet6-display\stm32g4xx_it.o"
+"g474vet6-display\stm32g4xx_hal_msp.o"
+"g474vet6-display\pic.o"
+"g474vet6-display\stm32g4xx_hal_tim.o"
+"g474vet6-display\stm32g4xx_hal_tim_ex.o"
+"g474vet6-display\stm32g4xx_hal_pwr_ex.o"
+"g474vet6-display\stm32g4xx_hal.o"
+"g474vet6-display\stm32g4xx_hal_rcc.o"
+"g474vet6-display\stm32g4xx_hal_rcc_ex.o"
+"g474vet6-display\stm32g4xx_hal_flash.o"
+"g474vet6-display\stm32g4xx_hal_flash_ex.o"
+"g474vet6-display\stm32g4xx_hal_flash_ramfunc.o"
+"g474vet6-display\stm32g4xx_hal_gpio.o"
+"g474vet6-display\stm32g4xx_hal_exti.o"
+"g474vet6-display\stm32g4xx_hal_dma.o"
+"g474vet6-display\stm32g4xx_hal_dma_ex.o"
+"g474vet6-display\stm32g4xx_hal_pwr.o"
+"g474vet6-display\stm32g4xx_hal_cortex.o"
+"g474vet6-display\system_stm32g4xx.o"
+--strict --scatter "G474VET6-Display\G474VET6-Display.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "G474VET6-Display.map" -o G474VET6-Display\G474VET6-Display.axf
