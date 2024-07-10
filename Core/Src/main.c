@@ -74,6 +74,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 			target = (target+1)>4? 4:target+1;
     }
 }
+
 /* USER CODE END 0 */
 
 /**
@@ -110,9 +111,9 @@ int main(void)
 	LCD_Initial();
 	Lcd_ColorBox(0, 0, 240, 320, White);
 	LCD_PutString(100, 120, "Made by:", Black, White, 0);
-	LCD_PutString(100, 140, "ÐìÎ°Áè", Black, White, 0);
-	LCD_PutString(100, 160, "²Ü  ÈÙ", Black, White, 0);
-	LCD_PutString(100, 180, "Ò×  •F", Black, White, 0);
+	LCD_PutString(100, 140, "ï¿½ï¿½Î°ï¿½ï¿½", Black, White, 0);
+	LCD_PutString(100, 160, "ï¿½ï¿½  ï¿½ï¿½", Black, White, 0);
+	LCD_PutString(100, 180, "ï¿½ï¿½  ï¿½F", Black, White, 0);
 	LCD_delay(5000);
   int num = 0;
 	char str_num[2];
