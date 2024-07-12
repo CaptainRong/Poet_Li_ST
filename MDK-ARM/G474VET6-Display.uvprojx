@@ -406,6 +406,11 @@
               <FilePath>.\function.c</FilePath>
             </File>
             <File>
+              <FileName>Pic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Pic.c</FilePath>
+            </File>
+            <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Core/Src/main.c</FilePath>
@@ -419,11 +424,6 @@
               <FileName>stm32g4xx_hal_msp.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Core/Src/stm32g4xx_hal_msp.c</FilePath>
-            </File>
-            <File>
-              <FileName>Pic.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Pic.c</FilePath>
             </File>
           </Files>
         </Group>

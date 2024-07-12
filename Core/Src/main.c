@@ -57,24 +57,9 @@ static void MX_GPIO_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-volatile uint8_t layer = 0;
-volatile uint8_t target = 0;
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-    if (GPIO_Pin == GPIO_PIN_4) // KEY1
-    {
-			target = (target-1)<0? 0:target-1;
-    }
-    else if (GPIO_Pin == GPIO_PIN_5) // KEY2
-    {
-			layer = layer==0? 1:0;
-    }
-    else if (GPIO_Pin == GPIO_PIN_6) // KEY3
-    {
-			target = (target+1)>4? 4:target+1;
-    }
-}
-
+uint8_t layer = 0;
+uint8_t target = 0;
+uint8_t change = 0;
 /* USER CODE END 0 */
 
 /**
@@ -111,35 +96,43 @@ int main(void)
 	LCD_Initial();
 	Lcd_ColorBox(0, 0, 240, 320, White);
 	LCD_PutString(100, 120, "Made by:", Black, White, 0);
-	LCD_PutString(100, 140, "ï¿½ï¿½Î°ï¿½ï¿½", Black, White, 0);
-	LCD_PutString(100, 160, "ï¿½ï¿½  ï¿½ï¿½", Black, White, 0);
-	LCD_PutString(100, 180, "ï¿½ï¿½  ï¿½F", Black, White, 0);
-	LCD_delay(5000);
+	LCD_PutString(100, 140, "ÐìÎ°Áè", Black, White, 0);
+	LCD_PutString(100, 160, "²Ü  ÈÙ", Black, White, 0);
+	LCD_PutString(100, 180, "Ò×  •F", Black, White, 0);
+	
   int num = 0;
 	char str_num[2];
 	int ifdynamic = 0;
 	char test_vals[4];
+	test_vals[0] = layer + '0';
+	test_vals[2] = target + '0';
+	
 	test_vals[3] = '\0';
 	test_vals[1] = ',';
+	
+	LCD_PutString(200, 300, test_vals, Black, White, 1);
+	
+	HAL_Delay(5000);
 	Lcd_ColorBox(0, 0, 240, 320, White);
 	draw_menu(layer, target);
+	LCD_PutString(200, 300, test_vals, Black, White, 1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-	
+
   while (1)
   {
 		int cur_layer = layer;
 		int cur_target = target;
 		
-		if(HAL_GPIO_ReadPin(KEY1_GPIO_Port, KEY1_Pin)==0) target = (target-1)<0? 0:target-1;
-		if(HAL_GPIO_ReadPin(KEY1_GPIO_Port, KEY2_Pin)==0) layer = layer==0? 1:0;
-		if(HAL_GPIO_ReadPin(KEY1_GPIO_Port, KEY3_Pin)==0) target = (target+1)>4? 4:target+1;
+		//if(HAL_GPIO_ReadPin(KEY1_GPIO_Port, KEY1_Pin)==0) target = (target-1)<0? 0:target-1;
+		//if(HAL_GPIO_ReadPin(KEY1_GPIO_Port, KEY2_Pin)==0) layer = layer==0? 1:0;
+		//if(HAL_GPIO_ReadPin(KEY1_GPIO_Port, KEY3_Pin)==0) target = (target+1)>4? 4:target+1;
 
-		test_vals[0] = layer+'0';
+		test_vals[0] = layer + '0';
 		test_vals[2] = target + '0';
-		if ((cur_layer != layer)||(cur_target != target)){
+		if (change == 1){
 			Lcd_ColorBox(0, 0, 240, 320, White);
 			ifdynamic = draw_menu(layer, target);
 
@@ -149,13 +142,15 @@ int main(void)
 		//LCD_delay(100);
 		if (ifdynamic){
 			num ++;
-			if (num >= 50) num = 0;
-			str_num[0] = ((int)num/5) +'0';
+			if (num >= 100) num = 0;
+			str_num[0] = ((int)num/10) +'0';
 			str_num[1] = '\0';
 			LCD_PutString(10, 30,"loop from 0 to 9:", Black, White, 1);
 			LCD_PutString(10, 200, str_num, Black, White, 1);
 			
 		}
+		change = 0;
+		HAL_Delay(100);
 	}
 		
     /* USER CODE END WHILE */
@@ -181,10 +176,17 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  RCC_OscInitStruct.PLL.PLLM = RCC_PLLM_DIV2;
+  RCC_OscInitStruct.PLL.PLLN = 30;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+  RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
+  RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -194,15 +196,16 @@ void SystemClock_Config(void)
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
   {
     Error_Handler();
   }
+  HAL_RCC_MCOConfig(RCC_MCO1, RCC_MCO1SOURCE_HSI, RCC_MCODIV_1);
 }
 
 /**
@@ -218,6 +221,7 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOE_CLK_ENABLE();
+  __HAL_RCC_GPIOF_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
@@ -238,17 +242,59 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : KEY1_Pin KEY2_Pin KEY3_Pin */
-  GPIO_InitStruct.Pin = KEY1_Pin|KEY2_Pin|KEY3_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  /*Configure GPIO pins : PA4 PA5 PA6 */
+  GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PA8 */
+  GPIO_InitStruct.Pin = GPIO_PIN_8;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  GPIO_InitStruct.Alternate = GPIO_AF0_MCO;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI4_IRQn, 3, 0);
+  HAL_NVIC_EnableIRQ(EXTI4_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 3, 3);
+  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+	if (GPIO_Pin == GPIO_PIN_4) // KEY1
+	{
+		for(uint16_t i=0;i<10000;i++) __NOP();
+    if(!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4)){
+			target = (target-1)<0? 0:target-1;
+			change = 1;
+		}
+	}
+	else if (GPIO_Pin == GPIO_PIN_5) // KEY2
+	{
+		for(uint16_t i=0;i<10000;i++) __NOP();
+    if(!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5)){
+			layer = layer==0? 1:0;
+			change = 1;
+		}
+	}
+	else if (GPIO_Pin == GPIO_PIN_6) // KEY3
+	{
+		for(uint16_t i=0;i<10000;i++) __NOP();
+    if(!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6)){
+			target = (target+1)>4? 4:target+1;
+			change = 1;
+		}
+	}
+}
 
 /* USER CODE END 4 */
 
