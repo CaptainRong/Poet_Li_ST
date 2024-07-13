@@ -24,6 +24,7 @@
 #include "LCD.h"
 #include <math.h>
 #include "function.h"
+#define LENGTH 21 
 extern const unsigned char gImage_20[800];
 /* USER CODE END Includes */
 
@@ -43,6 +44,9 @@ extern const unsigned char gImage_20[800];
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+UART_HandleTypeDef huart1;
+DMA_HandleTypeDef hdma_usart1_rx;
+DMA_HandleTypeDef hdma_usart1_tx;
 
 /* USER CODE BEGIN PV */
 
@@ -51,6 +55,8 @@ extern const unsigned char gImage_20[800];
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
+static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -60,6 +66,9 @@ static void MX_GPIO_Init(void);
 uint8_t layer = 0;
 uint8_t target = 0;
 uint8_t change = 0;
+uint8_t UART_temp;
+uint8_t uart_dma_temp_rx[LENGTH];
+uint8_t uart_dma_temp_tx[LENGTH]; //A55A20221071473A5A5 = 4+11+4 = 19 +\n = 20
 /* USER CODE END 0 */
 
 /**
@@ -91,7 +100,11 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
+	HAL_UART_Receive_DMA(&huart1, (uint8_t*)uart_dma_temp_rx, LENGTH); //recieve
+	
 	LCD_GPIO_Config();
 	LCD_Initial();
 	Lcd_ColorBox(0, 0, 240, 320, White);
@@ -123,12 +136,12 @@ int main(void)
 
   while (1)
   {
+		if(HAL_UART_Receive(&huart1, &UART_temp, 1, 1) == HAL_OK){
+			HAL_UART_Transmit(&huart1, &UART_temp, 1,1);
+		}
+		
 		int cur_layer = layer;
 		int cur_target = target;
-		
-		//if(HAL_GPIO_ReadPin(KEY1_GPIO_Port, KEY1_Pin)==0) target = (target-1)<0? 0:target-1;
-		//if(HAL_GPIO_ReadPin(KEY1_GPIO_Port, KEY2_Pin)==0) layer = layer==0? 1:0;
-		//if(HAL_GPIO_ReadPin(KEY1_GPIO_Port, KEY3_Pin)==0) target = (target+1)>4? 4:target+1;
 
 		test_vals[0] = layer + '0';
 		test_vals[2] = target + '0';
@@ -151,6 +164,7 @@ int main(void)
 		}
 		change = 0;
 		HAL_Delay(100);
+		
 	}
 		
     /* USER CODE END WHILE */
@@ -209,6 +223,74 @@ void SystemClock_Config(void)
 }
 
 /**
+  * @brief USART1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART1_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART1_Init 0 */
+
+  /* USER CODE END USART1_Init 0 */
+
+  /* USER CODE BEGIN USART1_Init 1 */
+
+  /* USER CODE END USART1_Init 1 */
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = 115200;
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+  huart1.Init.StopBits = UART_STOPBITS_1;
+  huart1.Init.Parity = UART_PARITY_NONE;
+  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+  huart1.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  huart1.Init.ClockPrescaler = UART_PRESCALER_DIV1;
+  huart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  if (HAL_UART_Init(&huart1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_UARTEx_SetTxFifoThreshold(&huart1, UART_TXFIFO_THRESHOLD_1_8) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_UARTEx_SetRxFifoThreshold(&huart1, UART_RXFIFO_THRESHOLD_1_8) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_UARTEx_DisableFifoMode(&huart1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART1_Init 2 */
+
+  /* USER CODE END USART1_Init 2 */
+
+}
+
+/**
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void)
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMAMUX1_CLK_ENABLE();
+  __HAL_RCC_DMA1_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA1_Channel1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel1_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel1_IRQn);
+  /* DMA1_Channel2_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel2_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel2_IRQn);
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -223,6 +305,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOE_CLK_ENABLE();
   __HAL_RCC_GPIOF_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_1, GPIO_PIN_RESET);
@@ -293,6 +376,15 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 			target = (target+1)>4? 4:target+1;
 			change = 1;
 		}
+	}
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	if(huart == &huart1)
+	{
+		HAL_UART_Transmit(&huart1, &UART_temp, 1, 1);
+		HAL_UART_Receive_IT(&huart1, &UART_temp, 1);
 	}
 }
 

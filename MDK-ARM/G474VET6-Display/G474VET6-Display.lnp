@@ -9,6 +9,8 @@
 "g474vet6-display\stm32g4xx_hal_tim.o"
 "g474vet6-display\stm32g4xx_hal_tim_ex.o"
 "g474vet6-display\stm32g4xx_hal_pwr_ex.o"
+"g474vet6-display\stm32g4xx_hal_uart.o"
+"g474vet6-display\stm32g4xx_hal_uart_ex.o"
 "g474vet6-display\stm32g4xx_hal.o"
 "g474vet6-display\stm32g4xx_hal_rcc.o"
 "g474vet6-display\stm32g4xx_hal_rcc_ex.o"
