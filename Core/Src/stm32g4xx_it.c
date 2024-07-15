@@ -219,10 +219,10 @@ void EXTI4_IRQHandler(void)
   */
 void DMA1_Channel1_IRQHandler(void)
 {
+  /* USER CODE BEGIN DMA1_Channel1_IRQn 0 */
 	#define LENGTH 21
 	extern uint8_t uart_dma_temp_rx[LENGTH];
 	extern uint8_t uart_dma_temp_tx[LENGTH];
-  /* USER CODE BEGIN DMA1_Channel1_IRQn 0 */
 	if (__HAL_DMA_GET_FLAG(&hdma_usart1_rx, DMA_FLAG_TC1))
 	{
 		__HAL_DMA_CLEAR_FLAG(&hdma_usart1_rx, DMA_FLAG_TC1);
