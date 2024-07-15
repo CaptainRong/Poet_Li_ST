@@ -197,7 +197,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = RCC_PLLM_DIV2;
-  RCC_OscInitStruct.PLL.PLLN = 40;
+  RCC_OscInitStruct.PLL.PLLN = 30;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
   RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
@@ -215,7 +215,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
   {
     Error_Handler();
   }
@@ -355,26 +355,32 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
 	if (GPIO_Pin == GPIO_PIN_4) // KEY1
 	{
+		HAL_Delay(5); 
 		for(uint16_t i=0;i<10000;i++) __NOP();
     if(!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4)){
 			target = (target-1)<0? 0:target-1;
 			change = 1;
+			while (!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4));
 		}
 	}
 	else if (GPIO_Pin == GPIO_PIN_5) // KEY2
 	{
+		HAL_Delay(5); 
 		for(uint16_t i=0;i<10000;i++) __NOP();
     if(!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5)){
 			layer = layer==0? 1:0;
 			change = 1;
+			while (!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5));
 		}
 	}
 	else if (GPIO_Pin == GPIO_PIN_6) // KEY3
 	{
+		HAL_Delay(5); 
 		for(uint16_t i=0;i<10000;i++) __NOP();
     if(!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6)){
 			target = (target+1)>4? 4:target+1;
 			change = 1;
+			while (!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6));
 		}
 	}
 }
