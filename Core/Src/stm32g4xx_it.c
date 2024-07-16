@@ -225,14 +225,14 @@ void EXTI4_IRQHandler(void)
 void DMA1_Channel1_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA1_Channel1_IRQn 0 */
-	
+	/*
 	if (__HAL_DMA_GET_FLAG(&hdma_usart1_rx, DMA_FLAG_TC1))
 	{
 		__HAL_DMA_CLEAR_FLAG(&hdma_usart1_rx, DMA_FLAG_TC1);
 		for(uint8_t i=0;i<LENGTH;i++) uart_dma_temp_tx[i] = uart_dma_temp_rx[i];
 		HAL_UART_Transmit_DMA(&huart1, (uint8_t*)uart_dma_temp_tx, LENGTH);
 	}
-	
+	*/
   /* USER CODE END DMA1_Channel1_IRQn 0 */
   HAL_DMA_IRQHandler(&hdma_usart1_rx);
   /* USER CODE BEGIN DMA1_Channel1_IRQn 1 */
@@ -280,9 +280,15 @@ void USART1_IRQHandler(void)
 		__HAL_UART_CLEAR_IDLEFLAG(&huart1);
 		HAL_UART_DMAStop(&huart1);
 		
-		uint8_t data_length = 255 - __HAL_DMA_GET_COUNTER(&hdma_usart1_rx);
-		printf("CAPP_DMA_TEST is %d\r\n", data_length);
+		uint8_t data_length = LENGTH - __HAL_DMA_GET_COUNTER(&hdma_usart1_rx);
+		
+		//printf("CAPP_DMA_TEST is %d\r\n", data_length);		
 		HAL_UART_Transmit_DMA(&huart1, uart_dma_temp_rx, data_length);
+		
+		/*
+		printf("\r\n***TEST***\r\n");
+		printf("%s\r\n",(uint8_t*)uart_dma_temp_rx);
+		*/
 		
 		HAL_UART_Receive_DMA(&huart1, (uint8_t*)uart_dma_temp_rx, LENGTH);
 		

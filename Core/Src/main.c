@@ -26,7 +26,7 @@
 #include "function.h"
 
 #include "stdio.h"
-#define LENGTH 10 
+#define LENGTH 21 
 extern const unsigned char gImage_20[800];
 /* USER CODE END Includes */
 
