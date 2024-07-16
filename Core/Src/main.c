@@ -385,6 +385,12 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 				printf("A55A+20221071473+A5A5");
 				return;
 			}
+			
+			if(ifdynamic == 2){
+				printf("No right");
+				return;
+			}
+			
 			target = (target-1)<0? 0:target-1;
 			change = 1;
 			while (!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4));
@@ -400,6 +406,12 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 				printf("A55A+20221071019+A5A5");
 				return;
 			}
+			
+			if(ifdynamic == 2){
+				printf("No right");
+				return;
+			}
+			
 			layer = layer==0? 1:0;
 			change = 1;
 			while (!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5));
@@ -415,6 +427,12 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 				printf("A55A+20221071345+A5A5");
 				return;
 			}
+			
+			if(ifdynamic == 2){
+				printf("No right");
+				return;
+			}
+			
 			target = (target+1)>4? 4:target+1;
 			change = 1;
 			while (!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6));

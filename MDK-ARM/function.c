@@ -31,20 +31,32 @@ void draw_frame(int x1, int y1, int x2, int y2, int color){
 
 ;
 void draw_two_first_task(){
-	//第二次
+	//第一次
 	char* menu[] = {"ChuanKouYanShi","XWL20221071473","CR20221071019","YM20221071345","AnJianXinXiFaSong"};
+	
 	for(int i=0;i<5;i++){
 		LCD_PutString(10, 10+i*(300/5), menu[i], Black, White, 0);
-	}
+	}	
 	
 }
 
-void draw_two_second_task(int target){
+void draw_two_second_task(int num){
 	//第二次
-	char* menu[] = {"ChuanKouYanShi","XWL20221071019","CR20221071019","YM20221071019","AnJianXinXiFaSong"};
-	for(int i=0;i<5;i++){
-		LCD_PutString(10, 10+i*(300/5), menu[i], Black, White, 0);
-	}
+	/*
+	目前一号：xwl
+			二号：cr
+			三号：ym
+	*/
+	char* name[] = {"XWL20221071473","CR20221071019","YM20221071345"};
+	/*   这里显示对应的名字和图片 begin  */
+	//num为对应的序号，e.g.：如果num为1 -> xwl。放xwl的图片，学号，姓名
+	
+	Lcd_ColorBox(0, 0, 240, 320, White);
+	LCD_PutString(100, 120, "name and number", Black, White, 0);
+	
+	/*   这里显示对应的名字和图片 end    */
+	
+	
 	
 }
 
@@ -66,8 +78,10 @@ int draw_menu(int layer, int target){
 				draw_two_first_task();
 				return 1;
 			case 1:
-				draw_two_second_task(target);
-				return 0;
+				Lcd_ColorBox(0, 0, 240, 320, White);
+				LCD_PutString(100, 120, "Transmit num", Black, White, 0);
+				//draw_two_second_task(target);
+				return 2;
 			case 2:
 				Lcd_ColorBox(40, 120, 80, 80, Yellow);
 				break;
