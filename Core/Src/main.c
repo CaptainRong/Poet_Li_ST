@@ -382,7 +382,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     if(!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4)){
 			if(ifdynamic == 1){
 				printf("KEY1 Press!\r\n");
-				printf("A55A+XueHao_1+A5A5");
+				printf("A55A+20221071473+A5A5");
 				return;
 			}
 			target = (target-1)<0? 0:target-1;
@@ -397,7 +397,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     if(!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5)){
 			if(ifdynamic == 1){
 				printf("KEY2 Press!\r\n");
-				printf("A55A+XueHao_2+A5A5");
+				printf("A55A+20221071019+A5A5");
 				return;
 			}
 			layer = layer==0? 1:0;
@@ -412,7 +412,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     if(!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6)){
 			if(ifdynamic == 1){
 				printf("KEY3 Press!\r\n");
-				printf("A55A+XueHao_3+A5A5");
+				printf("A55A+20221071345+A5A5");
 				return;
 			}
 			target = (target+1)>4? 4:target+1;

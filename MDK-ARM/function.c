@@ -32,7 +32,7 @@ void draw_frame(int x1, int y1, int x2, int y2, int color){
 ;
 void draw_two_first_task(){
 	//µÚ¶þ´Î
-	char* menu[] = {"ChuanKouYanShi","XWL20221071019","CR20221071019","YM20221071019","AnJianXinXiFaSong"};
+	char* menu[] = {"ChuanKouYanShi","XWL20221071473","CR20221071019","YM20221071345","AnJianXinXiFaSong"};
 	for(int i=0;i<5;i++){
 		LCD_PutString(10, 10+i*(300/5), menu[i], Black, White, 0);
 	}
