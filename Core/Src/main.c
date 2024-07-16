@@ -26,7 +26,7 @@
 #include "function.h"
 
 #include "stdio.h"
-#define LENGTH 21 
+#define LENGTH 19 
 
 extern char xwl[], cr[], ym[];
 /* USER CODE END Includes */

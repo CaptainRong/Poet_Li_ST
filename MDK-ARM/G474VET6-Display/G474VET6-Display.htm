@@ -3,7 +3,7 @@
 <title>Static Call Graph - [G474VET6-Display\G474VET6-Display.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image G474VET6-Display\G474VET6-Display.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6220000: Last Updated: Tue Jul 16 23:34:50 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6220000: Last Updated: Wed Jul 17 03:13:39 2024
 <BR><P>
 <H3>Maximum Stack Usage =        224 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1106,8 +1106,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_CheckIdleState
 </UL>
 
-<P><STRONG><a name="[2f]"></a>USART1_IRQHandler</STRONG> (Thumb, 140 bytes, Stack size 8 bytes, stm32g4xx_it.o(.text.USART1_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 204<LI>Call Chain = USART1_IRQHandler &rArr; check_received_data &rArr; draw_two_second_task &rArr; LCD_PutString &rArr; DrawPixel &rArr; BlockWrite &rArr; Lcd_SetCursor
+<P><STRONG><a name="[2f]"></a>USART1_IRQHandler</STRONG> (Thumb, 144 bytes, Stack size 16 bytes, stm32g4xx_it.o(.text.USART1_IRQHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 212<LI>Call Chain = USART1_IRQHandler &rArr; check_received_data &rArr; draw_two_second_task &rArr; LCD_PutString &rArr; DrawPixel &rArr; BlockWrite &rArr; Lcd_SetCursor
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_IRQHandler
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_DMAStop
@@ -1124,11 +1124,10 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32g474xx.o(RESET)
 </UL>
-<P><STRONG><a name="[c4]"></a>check_received_data</STRONG> (Thumb, 248 bytes, Stack size 24 bytes, stm32g4xx_it.o(.text.check_received_data))
+<P><STRONG><a name="[c4]"></a>check_received_data</STRONG> (Thumb, 264 bytes, Stack size 24 bytes, stm32g4xx_it.o(.text.check_received_data))
 <BR><BR>[Stack]<UL><LI>Max Depth = 196<LI>Call Chain = check_received_data &rArr; draw_two_second_task &rArr; LCD_PutString &rArr; DrawPixel &rArr; BlockWrite &rArr; Lcd_SetCursor
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_two_second_task
-<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncmp
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;memcmp
 <LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncpy
@@ -1202,7 +1201,6 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = __2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_IRQHandler
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_received_data
 <LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_EXTI_Callback
 <LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_menu
 </UL>
