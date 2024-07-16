@@ -5,6 +5,10 @@
 #include <stdlib.h>
 
 extern const unsigned char gImage_20[12800];
+extern const unsigned char gImage_xwl[12808];
+extern const unsigned char gImage_cr[12648];
+extern const unsigned char gImage_ym[12808];
+
 void draw_circle(int x, int y ,int r, int color, int fill){
 	//DrawPixel(x, y, color);
 	if (!fill){
@@ -32,10 +36,10 @@ void draw_frame(int x1, int y1, int x2, int y2, int color){
 ;
 void draw_two_first_task(){
 	//第一次
-	char* menu[] = {"ChuanKouYanShi","XWL20221071473","CR20221071019","YM20221071345","AnJianXinXiFaSong"};
+	char* menu[] = {"串口通信演示系统","徐伟凌 20221071473","曹荣 20221071019","易旻 20221071345","请按键将信息发到串口"};
 	
 	for(int i=0;i<5;i++){
-		LCD_PutString(10, 10+i*(300/5), menu[i], Black, White, 0);
+		LCD_PutString(10, 10+i*(200/5), menu[i], Black, White, 0);
 	}	
 	
 }
@@ -47,13 +51,19 @@ void draw_two_second_task(int num){
 			二号：cr
 			三号：ym
 	*/
-	char* name[] = {"XWL20221071473","CR20221071019","YM20221071345"};
+	char* name[] = {"徐伟凌","曹荣","易旻"};
+	char* number[] = {"20221071473", "20221071019", "20221071345"};
+	
 	/*   这里显示对应的名字和图片 begin  */
 	//num为对应的序号，e.g.：如果num为1 -> xwl。放xwl的图片，学号，姓名
 	
 	Lcd_ColorBox(0, 0, 240, 320, White);
-	LCD_PutString(100, 120, "name and number", Black, White, 0);
-	
+	LCD_PutString(100, 40, name[num-1], Black, White, 0);
+	LCD_PutString(75, 60, number[num-1], Black, White, 0);
+	if (num==1) LCD_Fill_Pic(80, 100, 80, 80, gImage_xwl);
+	if (num==2) LCD_Fill_Pic(80, 100, 80, 80, gImage_cr);
+	if (num==3) LCD_Fill_Pic(80, 100, 80, 80, gImage_ym);
+
 	/*   这里显示对应的名字和图片 end    */
 	
 	
@@ -63,7 +73,7 @@ void draw_two_second_task(int num){
 int draw_menu(int layer, int target){
 	printf("%d, %d\n", layer, target);
 	//char* menu[] = {"Dynamic figures","Circle", "Square", "Picture", "Dot&Line"};
-	char* menu[] = {"function 1","function 2","Dynamic figures","Circle", "Square"};
+	char* menu[] = {"演示 1","演示 2","Undisplay","Undisplay", "Undisplay"};
 	
 	if(layer == 0) {
 		Lcd_ColorBox(8, 8+target*(300/5), 224, 22, Yellow);
@@ -79,7 +89,7 @@ int draw_menu(int layer, int target){
 				return 1;
 			case 1:
 				Lcd_ColorBox(0, 0, 240, 320, White);
-				LCD_PutString(100, 120, "Transmit num", Black, White, 0);
+				LCD_PutString(85, 20, "请发信息", Black, White, 0);
 				//draw_two_second_task(target);
 				return 2;
 			case 2:

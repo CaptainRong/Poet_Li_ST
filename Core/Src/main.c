@@ -27,7 +27,8 @@
 
 #include "stdio.h"
 #define LENGTH 21 
-extern const unsigned char gImage_20[800];
+
+extern char xwl[], cr[], ym[];
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -128,9 +129,9 @@ int main(void)
 	LCD_Initial();
 	Lcd_ColorBox(0, 0, 240, 320, White);
 	LCD_PutString(100, 120, "Made by:", Black, White, 0);
-	LCD_PutString(100, 140, "伟", Black, White, 0);
-	LCD_PutString(100, 160, "曹 荣", Black, White, 0);
-	LCD_PutString(100, 180, "��  �F", Black, White, 0);
+	LCD_PutString(100, 140, xwl, Black, White, 0);
+	LCD_PutString(100, 160, cr, Black, White, 0);
+	LCD_PutString(100, 180, ym, Black, White, 0);
 	
   int num = 0;
 	char str_num[2];

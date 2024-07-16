@@ -3,7 +3,7 @@
 <title>Static Call Graph - [G474VET6-Display\G474VET6-Display.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image G474VET6-Display\G474VET6-Display.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6220000: Last Updated: Tue Jul 16 22:33:08 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6220000: Last Updated: Tue Jul 16 23:34:50 2024
 <BR><P>
 <H3>Maximum Stack Usage =        224 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -976,6 +976,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BlockWrite
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_menu
+<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_two_second_task
 </UL>
 
 <P><STRONG><a name="[b7]"></a>LCD_GPIO_Config</STRONG> (Thumb, 74 bytes, Stack size 32 bytes, lcd.o(.text.LCD_GPIO_Config))
@@ -1149,10 +1150,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[c8]"></a>draw_two_second_task</STRONG> (Thumb, 48 bytes, Stack size 24 bytes, function.o(.text.draw_two_second_task))
+<P><STRONG><a name="[c8]"></a>draw_two_second_task</STRONG> (Thumb, 100 bytes, Stack size 24 bytes, function.o(.text.draw_two_second_task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 172<LI>Call Chain = draw_two_second_task &rArr; LCD_PutString &rArr; DrawPixel &rArr; BlockWrite &rArr; Lcd_SetCursor
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_PutString
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Fill_Pic
 <LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_ColorBox
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_received_data
@@ -1167,7 +1169,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> printf3.o(i.__0printf$3)
 </UL>
-<P><STRONG><a name="[6f]"></a>main</STRONG> (Thumb, 812 bytes, Stack size 32 bytes, main.o(.text.main))
+<P><STRONG><a name="[6f]"></a>main</STRONG> (Thumb, 828 bytes, Stack size 32 bytes, main.o(.text.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 224<LI>Call Chain = main &rArr; HAL_UART_Init &rArr; HAL_UART_MspInit &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Receive_DMA
