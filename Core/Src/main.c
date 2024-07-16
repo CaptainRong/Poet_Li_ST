@@ -37,7 +37,7 @@ extern const unsigned char gImage_20[800];
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+int ifdynamic = 0;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -128,13 +128,13 @@ int main(void)
 	LCD_Initial();
 	Lcd_ColorBox(0, 0, 240, 320, White);
 	LCD_PutString(100, 120, "Made by:", Black, White, 0);
-	LCD_PutString(100, 140, "ÐìÎ°Áè", Black, White, 0);
-	LCD_PutString(100, 160, "²Ü  ÈÙ", Black, White, 0);
-	LCD_PutString(100, 180, "Ò×  •F", Black, White, 0);
+	LCD_PutString(100, 140, "ä¼Ÿ", Black, White, 0);
+	LCD_PutString(100, 160, "æ›¹ è£", Black, White, 0);
+	LCD_PutString(100, 180, "ï¿½ï¿½  ï¿½F", Black, White, 0);
 	
   int num = 0;
 	char str_num[2];
-	int ifdynamic = 0;
+	
 	char test_vals[4];
 	test_vals[0] = layer + '0';
 	test_vals[2] = target + '0';
@@ -144,7 +144,7 @@ int main(void)
 	
 	LCD_PutString(200, 300, test_vals, Black, White, 1);
 	
-	HAL_Delay(3000);
+	HAL_Delay(1000);
 	Lcd_ColorBox(0, 0, 240, 320, White);
 	draw_menu(layer, target);
 	LCD_PutString(200, 300, test_vals, Black, White, 1);
@@ -175,7 +175,7 @@ int main(void)
 		
 		}
 		//SW_delay_ms(100);
-		if (ifdynamic){
+		/*if (ifdynamic){
 			num ++;
 			if (num >= 100) num = 0;
 			str_num[0] = ((int)num/10) +'0';
@@ -183,7 +183,7 @@ int main(void)
 			LCD_PutString(10, 30,"loop from 0 to 9:", Black, White, 1);
 			LCD_PutString(10, 200, str_num, Black, White, 1);
 			
-		}
+		}*/
 		change = 0;
 		HAL_Delay(100);
 		
@@ -380,6 +380,11 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		HAL_Delay(5); 
 		for(uint16_t i=0;i<10000;i++) __NOP();
     if(!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4)){
+			if(ifdynamic == 1){
+				printf("KEY1 Press!\r\n");
+				printf("A55A+XueHao_1+A5A5");
+				return;
+			}
 			target = (target-1)<0? 0:target-1;
 			change = 1;
 			while (!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4));
@@ -390,6 +395,11 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		HAL_Delay(5); 
 		for(uint16_t i=0;i<10000;i++) __NOP();
     if(!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5)){
+			if(ifdynamic == 1){
+				printf("KEY2 Press!\r\n");
+				printf("A55A+XueHao_2+A5A5");
+				return;
+			}
 			layer = layer==0? 1:0;
 			change = 1;
 			while (!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5));
@@ -400,6 +410,11 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		HAL_Delay(5); 
 		for(uint16_t i=0;i<10000;i++) __NOP();
     if(!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6)){
+			if(ifdynamic == 1){
+				printf("KEY3 Press!\r\n");
+				printf("A55A+XueHao_3+A5A5");
+				return;
+			}
 			target = (target+1)>4? 4:target+1;
 			change = 1;
 			while (!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6));
