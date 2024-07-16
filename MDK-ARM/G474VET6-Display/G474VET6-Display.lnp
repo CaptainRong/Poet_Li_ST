@@ -24,7 +24,7 @@
 "g474vet6-display\stm32g4xx_hal_pwr.o"
 "g474vet6-display\stm32g4xx_hal_cortex.o"
 "g474vet6-display\system_stm32g4xx.o"
---strict --scatter "G474VET6-Display\G474VET6-Display.sct"
+--library_type=microlib --strict --scatter "G474VET6-Display\G474VET6-Display.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "G474VET6-Display.map" -o G474VET6-Display\G474VET6-Display.axf

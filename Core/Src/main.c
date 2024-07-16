@@ -24,7 +24,9 @@
 #include "LCD.h"
 #include <math.h>
 #include "function.h"
-#define LENGTH 21 
+
+#include "stdio.h"
+#define LENGTH 10 
 extern const unsigned char gImage_20[800];
 /* USER CODE END Includes */
 
@@ -58,7 +60,21 @@ static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
+int fputc(int ch, FILE *f){
+	/*Rewrite the printf function*/
+	uint32_t temp = ch;
+	HAL_UART_Transmit(&huart1, (uint8_t *)&temp,1, 1000);
+	while(__HAL_UART_GET_FLAG(&huart1, UART_FLAG_TC) != SET);
+	return ch;
+}
 
+void SW_delay_ms(unsigned int time){
+	unsigned int i = 0;
+	while(time--){
+		i = 170000 * (170 / 60);
+		while(i--);
+	}
+}
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -103,7 +119,10 @@ int main(void)
   MX_DMA_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
+	__HAL_UART_ENABLE_IT(&huart1, UART_IT_IDLE);  // Enable serial port idle interrupt
 	HAL_UART_Receive_DMA(&huart1, (uint8_t*)uart_dma_temp_rx, LENGTH); //recieve
+	
+	
 	
 	LCD_GPIO_Config();
 	LCD_Initial();
@@ -125,7 +144,7 @@ int main(void)
 	
 	LCD_PutString(200, 300, test_vals, Black, White, 1);
 	
-	HAL_Delay(5000);
+	HAL_Delay(3000);
 	Lcd_ColorBox(0, 0, 240, 320, White);
 	draw_menu(layer, target);
 	LCD_PutString(200, 300, test_vals, Black, White, 1);
@@ -136,9 +155,12 @@ int main(void)
 
   while (1)
   {
-		if(HAL_UART_Receive(&huart1, &UART_temp, 1, 1) == HAL_OK){
+		/*if(HAL_UART_Receive(&huart1, &UART_temp, 1, 1) == HAL_OK){
 			HAL_UART_Transmit(&huart1, &UART_temp, 1,1);
 		}
+		hole_
+		*/
+		//printf("capptest");
 		
 		int cur_layer = layer;
 		int cur_target = target;
@@ -152,7 +174,7 @@ int main(void)
 			LCD_PutString(200, 300, test_vals, Black, White, 1);
 		
 		}
-		//LCD_delay(100);
+		//SW_delay_ms(100);
 		if (ifdynamic){
 			num ++;
 			if (num >= 100) num = 0;
@@ -185,7 +207,7 @@ void SystemClock_Config(void)
 
   /** Configure the main internal regulator output voltage
   */
-  HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1);
+  HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1_BOOST);
 
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
@@ -197,7 +219,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = RCC_PLLM_DIV2;
-  RCC_OscInitStruct.PLL.PLLN = 30;
+  RCC_OscInitStruct.PLL.PLLN = 85;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
   RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
@@ -215,7 +237,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)
   {
     Error_Handler();
   }

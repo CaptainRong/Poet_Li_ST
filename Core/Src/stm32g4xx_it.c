@@ -22,6 +22,7 @@
 #include "stm32g4xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "stdio.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -31,6 +32,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define LENGTH 21
+
 
 /* USER CODE END PD */
 
@@ -41,6 +44,8 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
+extern uint8_t uart_dma_temp_rx[LENGTH];
+extern uint8_t uart_dma_temp_tx[LENGTH];
 
 /* USER CODE END PV */
 
@@ -220,9 +225,7 @@ void EXTI4_IRQHandler(void)
 void DMA1_Channel1_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA1_Channel1_IRQn 0 */
-	#define LENGTH 21
-	extern uint8_t uart_dma_temp_rx[LENGTH];
-	extern uint8_t uart_dma_temp_tx[LENGTH];
+	
 	if (__HAL_DMA_GET_FLAG(&hdma_usart1_rx, DMA_FLAG_TC1))
 	{
 		__HAL_DMA_CLEAR_FLAG(&hdma_usart1_rx, DMA_FLAG_TC1);
@@ -272,7 +275,19 @@ void EXTI9_5_IRQHandler(void)
 void USART1_IRQHandler(void)
 {
   /* USER CODE BEGIN USART1_IRQn 0 */
-
+	if(__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE))  //进入了中断空�?
+  {
+		__HAL_UART_CLEAR_IDLEFLAG(&huart1);
+		HAL_UART_DMAStop(&huart1);
+		
+		uint8_t data_length = 255 - __HAL_DMA_GET_COUNTER(&hdma_usart1_rx);
+		printf("CAPP_DMA_TEST is %d\r\n", data_length);
+		HAL_UART_Transmit_DMA(&huart1, uart_dma_temp_rx, data_length);
+		
+		HAL_UART_Receive_DMA(&huart1, (uint8_t*)uart_dma_temp_rx, LENGTH);
+		
+		
+	}
   /* USER CODE END USART1_IRQn 0 */
   HAL_UART_IRQHandler(&huart1);
   /* USER CODE BEGIN USART1_IRQn 1 */

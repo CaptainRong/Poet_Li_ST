@@ -31,7 +31,7 @@ void draw_frame(int x1, int y1, int x2, int y2, int color){
 	
 
 int draw_menu(int layer, int target){
-	//printf("%d, %d\n", layer, target);
+	printf("%d, %d\n", layer, target);
 	char* menu[] = {"Dynamic figures","Circle", "Square", "Picture", "Dot&Line"};
 	if(layer == 0) {
 		Lcd_ColorBox(8, 8+target*(300/5), 224, 22, Yellow);
