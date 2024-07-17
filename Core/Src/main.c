@@ -409,7 +409,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 			}
 			
 			if(ifdynamic == 2){
-				printf("No right");
+				layer = layer==0? 1:0;
+				change = 1;
 				return;
 			}
 			

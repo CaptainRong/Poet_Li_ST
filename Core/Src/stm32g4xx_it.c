@@ -34,7 +34,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define LENGTH 19
+#define LENGTH 21
 
 extern int ifdynamic;
 extern uint8_t layer;
@@ -69,7 +69,7 @@ void check_received_data(const uint8_t *data)
         change = 1;
         return;
     }
-	if (strncmp((const char *)data, "A55A", 4) == 0 && strncmp((const char *)(data + 15), "A5A5", 4) == 0)
+	if (strncmp((const char *)data, "A55A", 4) == 0 && strncmp((const char *)(data + 15), "A5A5", 4) == 0 && strlen((const char *)data) == 19)
 	{
 			char number[12];
 			strncpy(number, (const char *)(data + 4), 11);
@@ -79,7 +79,7 @@ void check_received_data(const uint8_t *data)
 					strcmp(number, "20221071473") == 0 ||
 					strcmp(number, "20221071345") == 0)
 			{
-					printf("True\r\n");
+					// 调试信息 printf("True\r\n");
 					if(strcmp(number, "20221071019") == 0){
 						draw_two_second_task(2);
 						printf("name_number:2\r\n");
@@ -99,7 +99,7 @@ void check_received_data(const uint8_t *data)
 			}
 			else
 			{
-					printf("Data Format Error!\r\n");
+				printf("Data Format Error!\r\n");
 					layer = 1;
 					target = 0;
 					change = 1;
@@ -353,7 +353,7 @@ void USART1_IRQHandler(void)
 			check_received_data(uart_dma_temp_rx);
 		}
 		//check_received_data(uart_dma_temp_rx);
-		printf("Received data: %s\r\n", uart_dma_temp_rx);
+		// 调试信息 printf("Received data: %s\r\n", uart_dma_temp_rx);
 		
 		//HAL_UART_Transmit_DMA(&huart1, uart_dma_temp_rx, data_length);
 		memset(uart_dma_temp_rx, 0, LENGTH);  // 清空DMA缓冲区

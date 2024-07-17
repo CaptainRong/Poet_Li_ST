@@ -61,7 +61,7 @@ void draw_two_second_task(int num){
 	LCD_PutString(100, 40, name[num-1], Black, White, 0);
 	LCD_PutString(75, 60, number[num-1], Black, White, 0);
 	if (num==1) LCD_Fill_Pic(80, 100, 80, 80, gImage_xwl);
-	if (num==2) LCD_Fill_Pic(80, 100, 80, 80, gImage_cr);
+	if (num==2) LCD_Fill_Pic(80, 100, 79, 80, gImage_cr);
 	if (num==3) LCD_Fill_Pic(80, 100, 80, 80, gImage_ym);
 
 	/*   这里显示对应的名字和图片 end    */
@@ -90,6 +90,9 @@ int draw_menu(int layer, int target){
 			case 1:
 				Lcd_ColorBox(0, 0, 240, 320, White);
 				LCD_PutString(85, 20, "请发信息", Black, White, 0);
+				LCD_PutString(40, 40, "A55A20221071473A5A5", Black, White, 0);
+				LCD_PutString(40, 60, "A55A20221071019A5A5", Black, White, 0);
+				LCD_PutString(40, 80, "A55A20221071345A5A5", Black, White, 0);
 				//draw_two_second_task(target);
 				return 2;
 			case 2:
