@@ -38,7 +38,7 @@ extern char xwl[], cr[], ym[];
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-int ifdynamic = 0;
+int ifserial = 0;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -82,6 +82,7 @@ void SW_delay_ms(unsigned int time){
 /* USER CODE BEGIN 0 */
 uint8_t layer = 0;
 uint8_t target = 0;
+uint8_t pattern = 0; // use for function 1 and function 4
 uint8_t change = 0;
 uint8_t UART_temp;
 uint8_t uart_dma_temp_rx[LENGTH];
@@ -147,7 +148,7 @@ int main(void)
 	
 	HAL_Delay(1000);
 	Lcd_ColorBox(0, 0, 240, 320, White);
-	draw_menu(layer, target);
+	draw_menu(layer, target, pattern);
 	LCD_PutString(200, 300, test_vals, Black, White, 1);
   /* USER CODE END 2 */
 
@@ -170,13 +171,13 @@ int main(void)
 		test_vals[2] = target + '0';
 		if (change == 1){
 			Lcd_ColorBox(0, 0, 240, 320, White);
-			ifdynamic = draw_menu(layer, target);
-
+			ifserial = draw_menu(layer, target, pattern);
+			
 			LCD_PutString(200, 300, test_vals, Black, White, 1);
 		
 		}
 		//SW_delay_ms(100);
-		/*if (ifdynamic){
+		/*if (ifserial){
 			num ++;
 			if (num >= 100) num = 0;
 			str_num[0] = ((int)num/10) +'0';
@@ -381,19 +382,34 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		HAL_Delay(5); 
 		for(uint16_t i=0;i<10000;i++) __NOP();
     if(!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4)){
-			if(ifdynamic == 1){
-				printf("KEY1 Press!\r\n");
-				printf("A55A+20221071473+A5A5");
-				return;
-			}
-			
-			if(ifdynamic == 2){
-				printf("No right");
-				return;
-			}
-			
-			target = (target-1)<0? 0:target-1;
-			change = 1;
+			switch(layer)
+			{
+				case 0:
+					target = (target-1)<0? 0:target-1;
+					pattern = 0;
+					change = 1;
+					return;
+				
+				case 1:
+					switch(target)
+					{
+						case 0:
+							pattern = (pattern+1)%4;
+							change = 1;
+							return;
+						
+						case 1:
+							return;
+						
+						case 2:
+							return;
+						
+						case 3:
+							return;
+					}
+					return;
+					
+			}		
 			while (!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4));
 		}
 	}
@@ -402,20 +418,38 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		HAL_Delay(5); 
 		for(uint16_t i=0;i<10000;i++) __NOP();
     if(!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5)){
-			if(ifdynamic == 1){
-				printf("KEY2 Press!\r\n");
-				printf("A55A+20221071019+A5A5");
-				return;
-			}
-			
-			if(ifdynamic == 2){
-				layer = layer==0? 1:0;
-				change = 1;
-				return;
-			}
-			
-			layer = layer==0? 1:0;
-			change = 1;
+			switch(layer)
+			{
+				case 0:
+					layer = 1;
+					change = 1;
+					return;
+				
+				case 1:
+					switch(target)
+					{
+						case 0:
+							target += 1;
+							change = 1;
+							return;
+						
+						case 1:
+							
+							return;
+						
+						case 2:
+							
+							return;
+						
+						case 3:
+							layer = 0;  // used as back 2 menu
+							pattern = 0;
+							change = 1;
+							return;
+					}
+					return;
+					
+			}		
 			while (!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5));
 		}
 	}
@@ -424,19 +458,37 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		HAL_Delay(5); 
 		for(uint16_t i=0;i<10000;i++) __NOP();
     if(!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6)){
-			if(ifdynamic == 1){
-				printf("KEY3 Press!\r\n");
-				printf("A55A+20221071345+A5A5");
-				return;
-			}
-			
-			if(ifdynamic == 2){
-				printf("No right");
-				return;
-			}
-			
-			target = (target+1)>4? 4:target+1;
-			change = 1;
+			switch(layer)
+			{
+				case 0:
+					target = (target+1)>4? 4:target+1;
+					change = 1;
+					return;
+				
+				case 1:
+					switch(target)
+					{
+						case 0:
+							
+							return;
+						
+						case 1:
+							
+							return;
+						
+						case 2:
+							target = 3;
+							change = 1;
+							return;
+						
+						case 3:
+							pattern = (pattern+1)%4;
+							change = 1;
+							return;
+					}
+					return;
+					
+			}		
 			while (!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6));
 		}
 	}

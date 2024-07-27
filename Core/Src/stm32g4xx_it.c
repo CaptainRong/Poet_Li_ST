@@ -36,9 +36,10 @@
 /* USER CODE BEGIN PD */
 #define LENGTH 21
 
-extern int ifdynamic;
+extern int ifserial;
 extern uint8_t layer;
 extern uint8_t target;
+extern uint8_t pattern;
 extern uint8_t change;
 
 /* USER CODE END PD */
@@ -59,18 +60,19 @@ extern uint8_t uart_dma_temp_tx[LENGTH];
 /* USER CODE BEGIN PFP */
 
 void check_received_data(const uint8_t *data)
-{
-    // 校验数据的格式和内容
-	if (strncmp((const char *)data, "A55AA5A5", 8) == 0)
-    {
-        printf("A55AA5A5\r\n");
-        layer = 1;
-        target = 0;
-        change = 1;
-        return;
-    }
-	if (strncmp((const char *)data, "A55A", 4) == 0 && strncmp((const char *)(data + 15), "A5A5", 4) == 0 && strlen((const char *)data) == 19)
-	{
+{	
+	if (target == 1){
+		// 校验数据的格式和内容
+		if (strncmp((const char *)data, "A55AA5A5", 8) == 0){
+			//printf("A55AA5A5\r\n");
+			layer = 1;
+			target = 0;
+			change = 1;
+			return;
+		}
+		
+		if (strncmp((const char *)data, "A55A", 4) == 0 && strncmp((const char *)(data + 15), "A5A5", 4) == 0 && strlen((const char *)data) == 19)
+		{
 			char number[12];
 			strncpy(number, (const char *)(data + 4), 11);
 			number[11] = '\0';
@@ -79,42 +81,39 @@ void check_received_data(const uint8_t *data)
 					strcmp(number, "20221071473") == 0 ||
 					strcmp(number, "20221071345") == 0)
 			{
+				target = 2;
 					// 调试信息 printf("True\r\n");
-					if(strcmp(number, "20221071019") == 0){
-						draw_two_second_task(2);
-						printf("name_number:2\r\n");
-						return;
-					}
-					if(strcmp(number, "20221071473") == 0){
-						draw_two_second_task(1);
-						printf("name_number:1\r\n");
-						return;
-					}
-					if(strcmp(number, "20221071345") == 0){
-						draw_two_second_task(3);
-						printf("name_number:3\r\n");
-						return;
-					}
-					
+				if(strcmp(number, "20221071019") == 0){
+					printf("20221071019\r\n");
+					pattern = 1;
+				}
+				if(strcmp(number, "20221071473") == 0){
+					printf("20221071473\r\n");
+					pattern = 0;
+				}
+				if(strcmp(number, "20221071345") == 0){
+					printf("20221071345\r\n");
+					pattern = 2;
+				}
+				change = 1;
+				return;
 			}
-			else
-			{
+			else{
 				printf("Data Format Error!\r\n");
-					layer = 1;
-					target = 0;
-					change = 1;
-					return;		
-					
+				return;			
 			}
-	}
-	else
-	{
+		}
+		else{
 			printf("Data Format Error!\r\n");
-			layer = 1;
-			target = 0;
-			change = 1;
 			return;
+		}
 	}
+	if(target == 3){
+		/* --------------PUT UR CODE HERE(FUNCTION4)----------------*/
+	
+	
+	}
+		
 }
 /* USER CODE END PFP */
 
@@ -349,7 +348,7 @@ void USART1_IRQHandler(void)
 		//printf("CAPP_DMA_TEST is %d\r\n", data_length);
 		uart_dma_temp_rx[data_length] = '\0';  // Null-terminate the received data
 		
-		if(ifdynamic == 2){
+		if(ifserial == 1){
 			check_received_data(uart_dma_temp_rx);
 		}
 		//check_received_data(uart_dma_temp_rx);

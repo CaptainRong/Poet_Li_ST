@@ -8,6 +8,9 @@ extern const unsigned char gImage_20[12800];
 extern const unsigned char gImage_xwl[12808];
 extern const unsigned char gImage_cr[12648];
 extern const unsigned char gImage_ym[12808];
+extern char *name_li[];
+extern char *number_li[];
+
 
 void draw_circle(int x, int y ,int r, int color, int fill){
 	//DrawPixel(x, y, color);
@@ -34,46 +37,90 @@ void draw_frame(int x1, int y1, int x2, int y2, int color){
 }
 
 ;
-void draw_two_first_task(){
-	//第一次
-	char* menu[] = {"串口通信演示系统","徐伟凌 20221071473","曹荣 20221071019","易旻 20221071345","请按键将信息发到串口"};
-	
+void function1(int pattern){
+	//功能界面1
+	char* menu[] = {"串口通信演示系统","徐伟凌 20221071473","曹荣 20221071019","易旻 20221071345","请按键1将信息发到串口", "default"};
+	sprintf(menu[5], "模式%d", pattern);
 	for(int i=0;i<5;i++){
-		LCD_PutString(10, 10+i*(200/5), menu[i], Black, White, 0);
-	}	
+		LCD_PutString(10, 10+i*(220/6), menu[i], Black, White, 0);
+	}
 	
+	if (pattern != 0){
+		printf("KEY%d Press!", pattern);
+		printf("A55A%sA5A5", number_li[pattern-1]);
+	}
 }
 
-void draw_two_second_task(int num){
+void function2(){
+	LCD_PutString(40, 80, "串口通信系统", Black, White, 0);
+	LCD_PutString(20, 100, "正在接收串口数据", Black, White, 0);
+	return;
+}
+
+
+void function3(int num){
 	//第二次
 	/*
 	目前一号：xwl
 			二号：cr
 			三号：ym
 	*/
-	char* name[] = {"徐伟凌","曹荣","易旻"};
-	char* number[] = {"20221071473", "20221071019", "20221071345"};
-	
 	/*   这里显示对应的名字和图片 begin  */
 	//num为对应的序号，e.g.：如果num为1 -> xwl。放xwl的图片，学号，姓名
-	
-	Lcd_ColorBox(0, 0, 240, 320, White);
-	LCD_PutString(100, 40, name[num-1], Black, White, 0);
-	LCD_PutString(75, 60, number[num-1], Black, White, 0);
+	LCD_PutString(70, 20, "收到正确数据", Black, White, 0);
+	LCD_PutString(100, 40, name_li[num], Black, White, 0);
+	LCD_PutString(75, 60, number_li[num], Black, White, 0);
 	if (num==1) LCD_Fill_Pic(80, 100, 80, 80, gImage_xwl);
 	if (num==2) LCD_Fill_Pic(80, 100, 79, 80, gImage_cr);
 	if (num==3) LCD_Fill_Pic(80, 100, 80, 80, gImage_ym);
-
-	/*   这里显示对应的名字和图片 end    */
-	
-	
-	
 }
 
-int draw_menu(int layer, int target){
+
+void function4(int pattern){
+	/*---------------- PUT UR CODE HERE (FUNCTION4) --------------*/
+	
+	return;
+}
+	
+
+int draw_menu(int layer, int target, int pattern){
+	/*  LOGIC:
+	layer = 0:
+		main menu;
+	layer = 1, target = 0:
+		function1
+			press btn1->pattern += 1;
+			press btn2->taeget += 1;
+			pattern = 0: 
+				show pattern 0;
+			pattern	= 1:
+				show pattern 1, allow strs
+			pattern = 2:
+				aame;
+			pattern = 3:
+				same;
+	
+	layer = 1,target = 1:
+		function2
+			show text, allow ports
+			ports.get(number)->target += 1, ports.send(number);
+			ports.get(command)->target -= 1, disable btn1;
+	
+	layer = 1, target = 2:
+		function3
+			show texts, show img, show number
+			press btn3->target+=1;
+	
+	layer = 1, target = 3;
+		function4
+			press btn3->pattern += 1;
+		
+	
+	*/
+	
 	printf("%d, %d\n", layer, target);
 	//char* menu[] = {"Dynamic figures","Circle", "Square", "Picture", "Dot&Line"};
-	char* menu[] = {"演示 1","演示 2","Undisplay","Undisplay", "Undisplay"};
+	char* menu[] = {"演示 1","演示 2","演示 3","演示 4", "Undisplay"};
 	
 	if(layer == 0) {
 		Lcd_ColorBox(8, 8+target*(300/5), 224, 22, Yellow);
@@ -85,35 +132,24 @@ int draw_menu(int layer, int target){
 		//Lcd_ColorBox(0, 0, 240, 320, White);
 		switch(target){
 			case 0:
-				draw_two_first_task();
-				return 1;
+				function1(pattern);
+				return 0;
 			case 1:
-				Lcd_ColorBox(0, 0, 240, 320, White);
-				LCD_PutString(85, 20, "请发信息", Black, White, 0);
-				LCD_PutString(40, 40, "A55A20221071473A5A5", Black, White, 0);
-				LCD_PutString(40, 60, "A55A20221071019A5A5", Black, White, 0);
-				LCD_PutString(40, 80, "A55A20221071345A5A5", Black, White, 0);
+				function2();
 				//draw_two_second_task(target);
-				return 2;
+				return 1;
 			case 2:
-				Lcd_ColorBox(40, 120, 80, 80, Yellow);
-				break;
+				function3(pattern);
+				return 0;
 			case 3:
-				LCD_Fill_Pic(50, 130, 80, 80, gImage_20);
-				break;
+				function4(pattern);
+				return 1;
 			case 4:
-				for(int i=0;i<80;i++) DrawPixel(80+i, 120, Black);
-				draw_frame(80, 180, 160, 220, Blue2);
-				for (int i = 0; i < 40; i++) {
-					int x = rand() % (160 - 80 + 1) + 80;
-					int y = rand() % (220 - 180 + 1) + 180;
-					DrawPixel(x, y, Cyan);
-				}
-				break;
+				return 0;
 			default:
 				break;
-			}
 		}
-		return 0;
+	}
+	return 0;
 }
 
