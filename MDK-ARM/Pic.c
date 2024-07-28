@@ -3206,3 +3206,7 @@ char xwl[] = "ĞìÎ°Áè";
 char cr[] = "²ÜÈÙ";
 
 char ym[] = "Ò×•F";
+
+char *name_li[] = {xwl, cr, ym};
+char *number_li[] = {"20221071473", "20221071019", "20221071345"};
+
