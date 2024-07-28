@@ -28,7 +28,7 @@ I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x66965DEE)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x66965DEE)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x66965DEE)
 I (..\Core\Inc\ASCII.h)(0x66965DED)
-I (..\Core\Inc\GB1616.h)(0x66A59FA6)
+I (..\Core\Inc\GB1616.h)(0x66A5A0D4)
 I (..\Core\Inc\lcm_font.h)(0x66965DED)
 F (.\function.c)(0x66A4B921)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I./RTE/_G474VET6-Display-I"D:/Intellegent Hardware/MDK/Keil-MDK Pack/ARM/CMSIS/6.1.0/CMSIS/Core/Include"-I"D:/Intellegent Hardware/MDK/Keil-MDK Pack/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include"-D__UVISION_VERSION="540" -DSTM32G474xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G474xx-o g474vet6-display/function.o -MMD)
 I (..\Core\Inc\LCD.h)(0x66965DED)
