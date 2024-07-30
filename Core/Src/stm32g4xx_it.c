@@ -41,6 +41,10 @@ extern uint8_t layer;
 extern uint8_t target;
 extern uint8_t pattern;
 extern uint8_t change;
+extern uint8_t func1_part;
+extern char k1,k2,k3;
+extern int func3_num;
+
 
 /* USER CODE END PD */
 
@@ -54,66 +58,80 @@ extern uint8_t change;
 extern uint8_t uart_dma_temp_rx[LENGTH];
 extern uint8_t uart_dma_temp_tx[LENGTH];
 
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN PFP */
 
-void check_received_data(const uint8_t *data)
-{	
-	if (target == 1){
-		// У�����ݵĸ�ʽ������
-		if (strncmp((const char *)data, "A55AA5A5", 8) == 0){
-			//printf("A55AA5A5\r\n");
-			layer = 1;
-			target = 0;
-			change = 1;
-			return;
-		}
-		
-		if (strncmp((const char *)data, "A55A", 4) == 0 && strncmp((const char *)(data + 15), "A5A5", 4) == 0 && strlen((const char *)data) == 19)
-		{
-			char number[12];
-			strncpy(number, (const char *)(data + 4), 11);
-			number[11] = '\0';
+void check_received_data(const uint8_t *data){	
+  if (strncmp((const char *)data, "A55AA5A5", 8) == 0){
+    //printf("A55AA5A5\r\n");
+    // layer = 1;
+    // target = 0;
+    pattern = 1;
+    change = 1;
+    k1 = 0;
+    k2 = 1;
+    k3 = 0;
+    return ;
+  }
+  
+  if (strncmp((const char *)data, "A55A", 4) == 0 && strncmp((const char *)(data + 15), "A5A5", 4) == 0 && strlen((const char *)data) == 19)  {
+    char number[12];
+    strncpy(number, (const char *)(data + 4), 11);
+    number[11] = '\0';
 
-			if (strcmp(number, "20221071019") == 0 ||
-					strcmp(number, "20221071473") == 0 ||
-					strcmp(number, "20221071345") == 0)
-			{
-				target = 2;
-					// ������Ϣ printf("True\r\n");
-				if(strcmp(number, "20221071019") == 0){
-					printf("20221071019\r\n");
-					pattern = 1;
-				}
-				if(strcmp(number, "20221071473") == 0){
-					printf("20221071473\r\n");
-					pattern = 0;
-				}
-				if(strcmp(number, "20221071345") == 0){
-					printf("20221071345\r\n");
-					pattern = 2;
-				}
-				change = 1;
-				return;
-			}
-			else{
-				printf("Data Format Error!\r\n");
-				return;			
-			}
-		}
-		else{
-			printf("Data Format Error!\r\n");
-			return;
-		}
-	}
-	if(target == 3){
-		/* --------------PUT UR CODE HERE(FUNCTION4)----------------*/
-	
-	
-	}
-		
+    if (strcmp(number, "20221071019") == 0 ||
+        strcmp(number, "20221071473") == 0 ||
+        strcmp(number, "20221071345") == 0){
+      if(strcmp(number, "20221071019") == 0){
+        printf("20221071019\r\n");
+        pattern = 3;
+        change = 1;
+        func3_num = 2;
+        return;
+      }
+      if(strcmp(number, "20221071473") == 0){
+        printf("20221071473\r\n");
+        pattern = 3;
+        change = 1;
+        func3_num = 1;
+        return;
+      }
+      if(strcmp(number, "20221071345") == 0){
+        printf("20221071345\r\n");
+        pattern = 3;
+        change = 1;
+        func3_num = 3;
+        return;
+      }
+      
+    }
+    else{
+      printf("Data Format Error!\r\n");
+      return;			
+    }
+  }
+  else{
+    printf("Data Format Error!\r\n");
+    return;
+  }		
+}
+
+void func3_quit(const uint8_t *data){
+  if (strncmp((const char *)data, "exit1", 5) == 0){
+    //返回到功能界面1
+    pattern = 1;
+    change = 1;
+    return ;
+  }
+  if (strncmp((const char *)data, "exit2", 5) == 0){
+    //返回到功能界面1
+    pattern = 2;
+    change = 1;
+    return ;
+  }
 }
 /* USER CODE END PFP */
 
@@ -338,7 +356,7 @@ void EXTI9_5_IRQHandler(void)
 void USART1_IRQHandler(void)
 {
   /* USER CODE BEGIN USART1_IRQn 0 */
-	if(__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE))  //进入了中�?空�??
+	if(__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE))  //进入了中断
   {
 		__HAL_UART_CLEAR_IDLEFLAG(&huart1);
 		HAL_UART_DMAStop(&huart1);
@@ -351,8 +369,14 @@ void USART1_IRQHandler(void)
 		// if(ifserial == 1){
 		// 	check_received_data(uart_dma_temp_rx);
 		// }
-		//check_received_data(uart_dma_temp_rx);
-		// ������Ϣ printf("Received data: %s\r\n", uart_dma_temp_rx);
+    printf("Received data: %s\r\n", uart_dma_temp_rx);
+    if(pattern == 2){
+		  check_received_data(uart_dma_temp_rx);
+    }
+    if(pattern == 3){
+      func3_quit(uart_dma_temp_rx);
+    }
+		
 		
 		//HAL_UART_Transmit_DMA(&huart1, uart_dma_temp_rx, data_length);
 		memset(uart_dma_temp_rx, 0, LENGTH);  // ���DMA������

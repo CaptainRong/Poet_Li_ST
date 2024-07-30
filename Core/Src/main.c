@@ -88,6 +88,8 @@ uint8_t UART_temp;
 
 //uint8_t function;  // function 1 to 4  used by pattern
 uint8_t func1_part = 0;  // parttern of func_1
+int func3_num = 0;  //功能界面3显示的学号对应序号。e.g. 如果是1，则显示xwl...
+char k1=1,k2=1,k3=1;  // 按键是否有效
 
 
 
@@ -392,6 +394,10 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		HAL_Delay(5); 
 		for(uint16_t i=0;i<10000;i++) __NOP();
     if(!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4)){
+      if (!k1){
+        return;
+      }
+      
       if(pattern == 1){
         func1_part = ((func1_part + 1) > 3) ? 0 : (func1_part + 1);
         change = 1;
@@ -404,39 +410,15 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		HAL_Delay(5); 
 		for(uint16_t i=0;i<10000;i++) __NOP();
     if(!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5)){
-      
-			// switch(layer)
-			// {
-			// 	case 0:
-			// 		layer = 1;
-			// 		change = 1;
-			// 		return;
-				
-			// 	case 1:
-			// 		switch(target)
-			// 		{
-			// 			case 0:
-			// 				target += 1;
-			// 				change = 1;
-			// 				return;
-						
-			// 			case 1:
-							
-			// 				return;
-						
-			// 			case 2:
-							
-			// 				return;
-						
-			// 			case 3:
-			// 				layer = 0;  // used as back 2 menu
-			// 				pattern = 0;
-			// 				change = 1;
-			// 				return;
-			// 		}
-			// 		return;
-					
-			// }		
+      if (!k2){
+        return;
+      }
+      if(pattern == 1){
+        pattern = 2;
+        change = 1;
+        func1_part = 0;
+      }
+			
 			while (!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5));
 		}
 	}
@@ -445,37 +427,40 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		HAL_Delay(5); 
 		for(uint16_t i=0;i<10000;i++) __NOP();
     if(!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6)){
-			switch(layer)
-			{
-				case 0:
-					target = (target+1)>4? 4:target+1;
-					change = 1;
-					return;
+      if (!k3){
+        return;
+      }
+			// switch(layer)
+			// {
+			// 	case 0:
+			// 		target = (target+1)>4? 4:target+1;
+			// 		change = 1;
+			// 		return;
 				
-				case 1:
-					switch(target)
-					{
-						case 0:
+			// 	case 1:
+			// 		switch(target)
+			// 		{
+			// 			case 0:
 							
-							return;
+			// 				return;
 						
-						case 1:
+			// 			case 1:
 							
-							return;
+			// 				return;
 						
-						case 2:
-							target = 3;
-							change = 1;
-							return;
+			// 			case 2:
+			// 				target = 3;
+			// 				change = 1;
+			// 				return;
 						
-						case 3:
-							pattern = (pattern+1)%4;
-							change = 1;
-							return;
-					}
-					return;
+			// 			case 3:
+			// 				pattern = (pattern+1)%4;
+			// 				change = 1;
+			// 				return;
+			// 		}
+			// 		return;
 					
-			}		
+			// }		
 			while (!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6));
 		}
 	}
