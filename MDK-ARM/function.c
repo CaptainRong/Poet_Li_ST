@@ -10,6 +10,7 @@ extern const unsigned char gImage_cr[12648];
 extern const unsigned char gImage_ym[12808];
 extern char *name_li[];
 extern char *number_li[];
+extern uint8_t func1_part;
 
 
 void draw_circle(int x, int y ,int r, int color, int fill){
@@ -37,37 +38,62 @@ void draw_frame(int x1, int y1, int x2, int y2, int color){
 }
 
 ;
-void function1(int pattern){
-	//¹¦ÄÜ½çÃæ1
-	char* menu[] = {"´®¿ÚÍ¨ĞÅÑİÊ¾ÏµÍ³","ĞìÎ°Áè 20221071473","²ÜÈÙ 20221071019","Ò×•F 20221071345","Çë°´¼ü1½«ĞÅÏ¢·¢µ½´®¿Ú", "default"};
-	sprintf(menu[5], "Ä£Ê½%d", pattern);
-	for(int i=0;i<5;i++){
+void function1(){
+	//ï¿½ï¿½ï¿½Ü½ï¿½ï¿½ï¿½1
+	char* menu[] = {"system of Serial Cum",
+		"x w l 20221071473",
+		"c r 20221071019",
+		"y m 20221071345",
+		"press key 1 to send",
+		"pattern:"
+	 };
+
+	//sprintf(menu[5], "Ä£Ê½%d", pattern);
+	for(int i=0;i<6;i++){
 		LCD_PutString(10, 10+i*(220/6), menu[i], Black, White, 0);
 	}
-	
-	if (pattern != 0){
-		printf("KEY%d Press!", pattern);
-		printf("A55A%sA5A5", number_li[pattern-1]);
-	}
+	//printf("i's value: %d\n",(i*(220/6)));
+	switch (func1_part)
+	{
+	case 0:
+		/* code */
+		LCD_PutString(80,190,"0", Black, White, 0);
+		break;
+	case 1:
+		LCD_PutString(80,190,"1", Black, White, 0);
+		printf("KEY1 Press!\nA55A 20221071473 A5A5");
+		break;
+	case 2:
+		LCD_PutString(80,190,"2", Black, White, 0);
+		printf("KEY2 Press!\nA55A 20221071019 A5A5");
+		break;
+	case 3:
+		LCD_PutString(80,190,"3", Black, White, 0);
+		printf("KEY3 Press!\nA55A 20221071345 A5A5");
+		break;	
+	default:
+		break;
+	}	
+
 }
 
 void function2(){
-	LCD_PutString(40, 80, "´®¿ÚÍ¨ĞÅÏµÍ³", Black, White, 0);
-	LCD_PutString(20, 100, "ÕıÔÚ½ÓÊÕ´®¿ÚÊı¾İ", Black, White, 0);
+	LCD_PutString(40, 80, "ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ÏµÍ³", Black, White, 0);
+	LCD_PutString(20, 100, "ï¿½ï¿½ï¿½Ú½ï¿½ï¿½Õ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", Black, White, 0);
 	return;
 }
 
 
 void function3(int num){
-	//µÚ¶ş´Î
+	//ï¿½Ú¶ï¿½ï¿½ï¿½
 	/*
-	Ä¿Ç°Ò»ºÅ£ºxwl
-			¶şºÅ£ºcr
-			ÈıºÅ£ºym
+	Ä¿Ç°Ò»ï¿½Å£ï¿½xwl
+			ï¿½ï¿½ï¿½Å£ï¿½cr
+			ï¿½ï¿½ï¿½Å£ï¿½ym
 	*/
-	/*   ÕâÀïÏÔÊ¾¶ÔÓ¦µÄÃû×ÖºÍÍ¼Æ¬ begin  */
-	//numÎª¶ÔÓ¦µÄĞòºÅ£¬e.g.£ºÈç¹ûnumÎª1 -> xwl¡£·ÅxwlµÄÍ¼Æ¬£¬Ñ§ºÅ£¬ĞÕÃû
-	LCD_PutString(70, 20, "ÊÕµ½ÕıÈ·Êı¾İ", Black, White, 0);
+	/*   ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½Öºï¿½Í¼Æ¬ begin  */
+	//numÎªï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½Å£ï¿½e.g.ï¿½ï¿½ï¿½ï¿½ï¿½numÎª1 -> xwlï¿½ï¿½ï¿½ï¿½xwlï¿½ï¿½Í¼Æ¬ï¿½ï¿½Ñ§ï¿½Å£ï¿½ï¿½ï¿½ï¿½ï¿½
+	LCD_PutString(70, 20, "ï¿½Õµï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½", Black, White, 0);
 	LCD_PutString(100, 40, name_li[num], Black, White, 0);
 	LCD_PutString(75, 60, number_li[num], Black, White, 0);
 	if (num==1) LCD_Fill_Pic(80, 100, 80, 80, gImage_xwl);
@@ -83,7 +109,12 @@ void function4(int pattern){
 }
 	
 
-int draw_menu(int layer, int target, int pattern){
+int draw_menu(int function1_p, int nuu, int pattern){
+	/* 
+		function1_p: åŠŸèƒ½ç•Œé¢1çš„æ¨¡å¼ï¼Œ0åˆ°3
+		nuu ï¼š æš‚æ—¶ç”¨ä¸åˆ°çš„å˜é‡ï¼Œåˆä¸æƒ³å¤§èŒƒå›´æ”¹ï¼Œå†™å®Œå†è¯´å§
+	 */
+	//ToDo å¦‚æœæœ€ånuuç”¨ä¸ä¸Šï¼Œå°±åˆ äº†å§
 	/*  LOGIC:
 	layer = 0:
 		main menu;
@@ -118,37 +149,44 @@ int draw_menu(int layer, int target, int pattern){
 	
 	*/
 	
-	printf("%d, %d\n", layer, target);
+	//printf("%d, %d\n", layer, target);
 	//char* menu[] = {"Dynamic figures","Circle", "Square", "Picture", "Dot&Line"};
-	char* menu[] = {"ÑİÊ¾ 1","ÑİÊ¾ 2","ÑİÊ¾ 3","ÑİÊ¾ 4", "Undisplay"};
+	char* menu[] = {"ï¿½ï¿½Ê¾ 1","ï¿½ï¿½Ê¾ 2","ï¿½ï¿½Ê¾ 3","ï¿½ï¿½Ê¾ 4", "Undisplay"};
 	
+	/* åº”è¯¥ä¸ä¼šæœ‰layer = 1 çš„æƒ…å†µäº†	
 	if(layer == 0) {
 		Lcd_ColorBox(8, 8+target*(300/5), 224, 22, Yellow);
 		for(int i=0;i<5;i++){
 			LCD_PutString(10, 10+i*(300/5), menu[i], Black, White, 0);
 		}
 	}
-	if(layer == 1) {
-		//Lcd_ColorBox(0, 0, 240, 320, White);
-		switch(target){
-			case 0:
-				function1(pattern);
-				return 0;
-			case 1:
-				function2();
-				//draw_two_second_task(target);
-				return 1;
-			case 2:
-				function3(pattern);
-				return 0;
-			case 3:
-				function4(pattern);
-				return 1;
-			case 4:
-				return 0;
-			default:
-				break;
-		}
+	*/  
+
+	// if(layer == 1) {
+	// 	//Lcd_ColorBox(0, 0, 240, 320, White);
+	// 	switch(target){
+	// 		case 0:
+	// 			function1(pattern);
+	// 			return 0;
+	// 		case 1:
+	// 			function2();
+	// 			//draw_two_second_task(target);
+	// 			return 1;
+	// 		case 2:
+	// 			function3(pattern);
+	// 			return 0;
+	// 		case 3:
+	// 			function4(pattern);
+	// 			return 1;
+	// 		case 4:
+	// 			return 0;
+	// 		default:
+	// 			break;
+	// 	}
+	// }
+	if(pattern == 1){
+		//åŠŸèƒ½ç•Œé¢1çš„å±•ç¤º
+		function1();
 	}
 	return 0;
 }

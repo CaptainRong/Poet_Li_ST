@@ -5,11 +5,11 @@
 <h2>Tool Versions:</h2>
 IDE-Version: ��Vision V5.40.0.0
 Copyright (C) 2024 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: Fin Andcher, Yep, LIC=14HV2-921U3-MMX9I-TKGXZ-VNY0V-WQA17
+License Information: Rong Captain_rong, 111aaa, LIC=SDA0P-MVNUA-EVV1R-KT3ES-K1DVQ-CZP0M
  
 Tool Versions:
 Toolchain:       MDK-ARM Plus  Version: 5.40.0.3
-Toolchain Path:  D:\Intellegent Hardware\MDK\Keil-MDK\ARM\ARMCLANG\Bin
+Toolchain Path:  D:\Users\Captain_rong\AppData\Local\Keil_v5\ARM\ARMCLANG\Bin
 C Compiler:      ArmClang.exe V6.22
 Assembler:       Armasm.exe V6.22
 Linker/Locator:  ArmLink.exe V6.22
@@ -21,14 +21,29 @@ Target DLL:      CMSIS_AGDI.dll V1.33.18.0
 Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
-D:\Intellegent Hardware\Project\Poet_Li_ST\MDK-ARM\G474VET6-Display.uvprojx
-Project File Date:  07/16/2024
+e:\altera\G474VET6-Display\MDK-ARM\G474VET6-Display.uvprojx
+Project File Date:  07/30/2024
 
 <h2>Output:</h2>
-*** Using Compiler 'V6.22', folder: 'D:\Intellegent Hardware\MDK\Keil-MDK\ARM\ARMCLANG\Bin'
+*** Using Compiler 'V6.22', folder: 'D:\Users\Captain_rong\AppData\Local\Keil_v5\ARM\ARMCLANG\Bin'
 Rebuild target 'G474VET6-Display'
-compiling stm32g4xx_hal_uart_ex.c...
-assembling startup_stm32g474xx.s...
+compiling stm32g4xx_hal_pwr_ex.c...
+Pic.c(3204): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+ 3204 | char xwl[] = "<D0><EC>ΰ<C1><E8>";
+      |               ^~~~~~~~ ~~~~~~~~
+Pic.c(3206): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+ 3206 | char cr[] = "<B2><DC><C8><D9>";
+      |              ^~~~~~~~~~~~~~~~
+Pic.c(3208): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+ 3208 | char ym[] = "<D2>וF";
+      |              ^~~~
+3 warnings generated.
+compiling Pic.c...
+compiling stm32g4xx_hal_tim_ex.c...
+compiling stm32g4xx_hal_tim.c...
+compiling stm32g4xx_hal_msp.c...
+compiling stm32g4xx_it.c...
+compiling function.c...
 ../Core/Src/LCD.c(5): warning: In file included from...
 ../Core/Inc\GB1616.h(14): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
    14 | "<D0><EC>", 0x10,0x40,0x10,0x40,0x20,0xA0,0x41,0x10,
@@ -92,79 +107,27 @@ assembling startup_stm32g474xx.s...
       |  ^~~~~~~~
 20 warnings generated.
 compiling LCD.c...
-function.c(42): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   42 |         char* menu[] = {"<B4><AE><BF><DA>ͨ<D0><C5><D1><DD>ʾϵͳ","<D0><EC>ΰ<C1><E8> 20221071473","<B2><DC><C8><D9> 20221071019","<D2>וF 20221071345","<C7>밴<BC><FC>1<BD><AB><D0><C5>Ϣ<B7><A2><B5><BD><B4><AE><BF><DA>", "default"};
-      |                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-function.c(42): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   42 |         char* menu[] = {"<B4><AE><BF><DA>ͨ<D0><C5><D1><DD>ʾϵͳ","<D0><EC>ΰ<C1><E8> 20221071473","<B2><DC><C8><D9> 20221071019","<D2>וF 20221071345","<C7>밴<BC><FC>1<BD><AB><D0><C5>Ϣ<B7><A2><B5><BD><B4><AE><BF><DA>", "default"};
-      |                                                                ^~~~~~~~ ~~~~~~~~
-function.c(42): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   42 |         char* menu[] = {"<B4><AE><BF><DA>ͨ<D0><C5><D1><DD>ʾϵͳ","<D0><EC>ΰ<C1><E8> 20221071473","<B2><DC><C8><D9> 20221071019","<D2>וF 20221071345","<C7>밴<BC><FC>1<BD><AB><D0><C5>Ϣ<B7><A2><B5><BD><B4><AE><BF><DA>", "default"};
-      |                                                                                                ^~~~~~~~~~~~~~~~
-function.c(42): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   42 |         char* menu[] = {"<B4><AE><BF><DA>ͨ<D0><C5><D1><DD>ʾϵͳ","<D0><EC>ΰ<C1><E8> 20221071473","<B2><DC><C8><D9> 20221071019","<D2>וF 20221071345","<C7>밴<BC><FC>1<BD><AB><D0><C5>Ϣ<B7><A2><B5><BD><B4><AE><BF><DA>", "default"};
-      |                                                                                                                               ^~~~
-function.c(42): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   42 |         char* menu[] = {"<B4><AE><BF><DA>ͨ<D0><C5><D1><DD>ʾϵͳ","<D0><EC>ΰ<C1><E8> 20221071473","<B2><DC><C8><D9> 20221071019","<D2>וF 20221071345","<C7>밴<BC><FC>1<BD><AB><D0><C5>Ϣ<B7><A2><B5><BD><B4><AE><BF><DA>", "default"};
-      |                                                                                                                                                    ^~~~  ~~~~~~~~ ~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-function.c(55): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   55 |         LCD_PutString(40, 80, "<B4><AE><BF><DA>ͨ<D0><C5>ϵͳ", Black, White, 0);
-      |                                ^~~~~~~~~~~~~~~~~~~~~~~~
-function.c(56): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   56 |         LCD_PutString(20, 100, "<D5><FD><D4>ڽ<D3><CA>մ<AE><BF><DA><CA><FD><BE><DD>", Black, White, 0);
-      |                                 ^~~~~~~~~~~~ ~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-function.c(70): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   70 |         LCD_PutString(70, 20, "<CA>յ<BD><D5><FD>ȷ<CA><FD><BE><DD>", Black, White, 0);
-      |                                ^~~~ ~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~
-function.c(123): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-  123 |         char* menu[] = {"<D1><DD>ʾ 1","<D1><DD>ʾ 2","<D1><DD>ʾ 3","<D1><DD>ʾ 4", "Undisplay"};
-      |                          ^~~~~~~~
-function.c(123): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-  123 |         char* menu[] = {"<D1><DD>ʾ 1","<D1><DD>ʾ 2","<D1><DD>ʾ 3","<D1><DD>ʾ 4", "Undisplay"};
-      |                                        ^~~~~~~~
-function.c(123): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-  123 |         char* menu[] = {"<D1><DD>ʾ 1","<D1><DD>ʾ 2","<D1><DD>ʾ 3","<D1><DD>ʾ 4", "Undisplay"};
-      |                                                      ^~~~~~~~
-function.c(123): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-  123 |         char* menu[] = {"<D1><DD>ʾ 1","<D1><DD>ʾ 2","<D1><DD>ʾ 3","<D1><DD>ʾ 4", "Undisplay"};
-      |                                                                    ^~~~~~~~
-12 warnings generated.
-compiling function.c...
-compiling stm32g4xx_hal_tim.c...
-compiling stm32g4xx_hal_tim_ex.c...
-compiling stm32g4xx_hal_msp.c...
 compiling main.c...
-compiling stm32g4xx_it.c...
-compiling stm32g4xx_hal.c...
-Pic.c(3204): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
- 3204 | char xwl[] = "<D0><EC>ΰ<C1><E8>";
-      |               ^~~~~~~~ ~~~~~~~~
-Pic.c(3206): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
- 3206 | char cr[] = "<B2><DC><C8><D9>";
-      |              ^~~~~~~~~~~~~~~~
-Pic.c(3208): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
- 3208 | char ym[] = "<D2>וF";
-      |              ^~~~
-3 warnings generated.
-compiling Pic.c...
-compiling stm32g4xx_hal_pwr_ex.c...
-compiling stm32g4xx_hal_rcc.c...
-compiling stm32g4xx_hal_rcc_ex.c...
-compiling stm32g4xx_hal_flash.c...
-compiling stm32g4xx_hal_flash_ex.c...
+assembling startup_stm32g474xx.s...
 compiling stm32g4xx_hal_uart.c...
+compiling stm32g4xx_hal_rcc_ex.c...
+compiling stm32g4xx_hal.c...
 compiling stm32g4xx_hal_flash_ramfunc.c...
+compiling stm32g4xx_hal_uart_ex.c...
+compiling stm32g4xx_hal_rcc.c...
+compiling stm32g4xx_hal_flash.c...
+compiling stm32g4xx_hal_dma.c...
+compiling stm32g4xx_hal_flash_ex.c...
 compiling stm32g4xx_hal_gpio.c...
-compiling system_stm32g4xx.c...
 compiling stm32g4xx_hal_exti.c...
 compiling stm32g4xx_hal_dma_ex.c...
+compiling system_stm32g4xx.c...
 compiling stm32g4xx_hal_pwr.c...
 compiling stm32g4xx_hal_cortex.c...
-compiling stm32g4xx_hal_dma.c...
 linking...
-Program Size: Code=17380 RO-data=41576 RW-data=60 ZI-data=1404  
+Program Size: Code=15976 RO-data=3168 RW-data=36 ZI-data=1404  
 FromELF: creating hex file...
-"G474VET6-Display\G474VET6-Display.axf" - 0 Error(s), 35 Warning(s).
+"G474VET6-Display\G474VET6-Display.axf" - 0 Error(s), 23 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -181,13 +144,13 @@ Package Vendor: Keil
 
 <h2>Collection of Component include folders:</h2>
   ./RTE/_G474VET6-Display
-  D:/Intellegent Hardware/MDK/Keil-MDK Pack/ARM/CMSIS/6.1.0/CMSIS/Core/Include
-  D:/Intellegent Hardware/MDK/Keil-MDK Pack/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include
+  D:/Users/Captain_rong/AppData/Local/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/Core/Include
+  D:/Users/Captain_rong/AppData/Local/Arm/Packs/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include
 
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE@6.1.0
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

@@ -38,7 +38,7 @@ extern char xwl[], cr[], ym[];
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-int ifserial = 0;
+// int ifserial = 0;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -81,10 +81,17 @@ void SW_delay_ms(unsigned int time){
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 uint8_t layer = 0;
-uint8_t target = 0;
+uint8_t target = 0;  //  当前layer下的item
 uint8_t pattern = 0; // use for function 1 and function 4
 uint8_t change = 0;
 uint8_t UART_temp;
+
+//uint8_t function;  // function 1 to 4  used by pattern
+uint8_t func1_part = 0;  // parttern of func_1
+
+
+
+
 uint8_t uart_dma_temp_rx[LENGTH];
 uint8_t uart_dma_temp_tx[LENGTH]; //A55A20221071473A5A5 = 4+11+4 = 19 +\n = 20
 /* USER CODE END 0 */
@@ -148,8 +155,11 @@ int main(void)
 	
 	HAL_Delay(1000);
 	Lcd_ColorBox(0, 0, 240, 320, White);
-	draw_menu(layer, target, pattern);
+  pattern = 1;
+	draw_menu(func1_part, target, pattern);
 	LCD_PutString(200, 300, test_vals, Black, White, 1);
+  // 默认进入功能界面1
+  
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -171,7 +181,7 @@ int main(void)
 		test_vals[2] = target + '0';
 		if (change == 1){
 			Lcd_ColorBox(0, 0, 240, 320, White);
-			ifserial = draw_menu(layer, target, pattern);
+			draw_menu(func1_part, target, pattern);
 			
 			LCD_PutString(200, 300, test_vals, Black, White, 1);
 		
@@ -382,34 +392,10 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		HAL_Delay(5); 
 		for(uint16_t i=0;i<10000;i++) __NOP();
     if(!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4)){
-			switch(layer)
-			{
-				case 0:
-					target = (target-1)<0? 0:target-1;
-					pattern = 0;
-					change = 1;
-					return;
-				
-				case 1:
-					switch(target)
-					{
-						case 0:
-							pattern = (pattern+1)%4;
-							change = 1;
-							return;
-						
-						case 1:
-							return;
-						
-						case 2:
-							return;
-						
-						case 3:
-							return;
-					}
-					return;
-					
-			}		
+      if(pattern == 1){
+        func1_part = ((func1_part + 1) > 3) ? 0 : (func1_part + 1);
+        change = 1;
+      }
 			while (!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4));
 		}
 	}
@@ -418,38 +404,39 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		HAL_Delay(5); 
 		for(uint16_t i=0;i<10000;i++) __NOP();
     if(!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5)){
-			switch(layer)
-			{
-				case 0:
-					layer = 1;
-					change = 1;
-					return;
+      
+			// switch(layer)
+			// {
+			// 	case 0:
+			// 		layer = 1;
+			// 		change = 1;
+			// 		return;
 				
-				case 1:
-					switch(target)
-					{
-						case 0:
-							target += 1;
-							change = 1;
-							return;
+			// 	case 1:
+			// 		switch(target)
+			// 		{
+			// 			case 0:
+			// 				target += 1;
+			// 				change = 1;
+			// 				return;
 						
-						case 1:
+			// 			case 1:
 							
-							return;
+			// 				return;
 						
-						case 2:
+			// 			case 2:
 							
-							return;
+			// 				return;
 						
-						case 3:
-							layer = 0;  // used as back 2 menu
-							pattern = 0;
-							change = 1;
-							return;
-					}
-					return;
+			// 			case 3:
+			// 				layer = 0;  // used as back 2 menu
+			// 				pattern = 0;
+			// 				change = 1;
+			// 				return;
+			// 		}
+			// 		return;
 					
-			}		
+			// }		
 			while (!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5));
 		}
 	}

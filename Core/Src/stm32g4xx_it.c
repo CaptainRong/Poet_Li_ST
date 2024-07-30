@@ -36,7 +36,7 @@
 /* USER CODE BEGIN PD */
 #define LENGTH 21
 
-extern int ifserial;
+
 extern uint8_t layer;
 extern uint8_t target;
 extern uint8_t pattern;
@@ -62,7 +62,7 @@ extern uint8_t uart_dma_temp_tx[LENGTH];
 void check_received_data(const uint8_t *data)
 {	
 	if (target == 1){
-		// Ð£ÑéÊý¾ÝµÄ¸ñÊ½ºÍÄÚÈÝ
+		// Ð£ï¿½ï¿½ï¿½ï¿½ï¿½ÝµÄ¸ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if (strncmp((const char *)data, "A55AA5A5", 8) == 0){
 			//printf("A55AA5A5\r\n");
 			layer = 1;
@@ -82,7 +82,7 @@ void check_received_data(const uint8_t *data)
 					strcmp(number, "20221071345") == 0)
 			{
 				target = 2;
-					// µ÷ÊÔÐÅÏ¢ printf("True\r\n");
+					// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ printf("True\r\n");
 				if(strcmp(number, "20221071019") == 0){
 					printf("20221071019\r\n");
 					pattern = 1;
@@ -338,7 +338,7 @@ void EXTI9_5_IRQHandler(void)
 void USART1_IRQHandler(void)
 {
   /* USER CODE BEGIN USART1_IRQn 0 */
-	if(__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE))  //è¿›å…¥äº†ä¸­æ–?ç©ºé??
+	if(__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE))  //è¿›å…¥äº†ä¸­ï¿½?ç©ºï¿½??
   {
 		__HAL_UART_CLEAR_IDLEFLAG(&huart1);
 		HAL_UART_DMAStop(&huart1);
@@ -348,14 +348,14 @@ void USART1_IRQHandler(void)
 		//printf("CAPP_DMA_TEST is %d\r\n", data_length);
 		uart_dma_temp_rx[data_length] = '\0';  // Null-terminate the received data
 		
-		if(ifserial == 1){
-			check_received_data(uart_dma_temp_rx);
-		}
+		// if(ifserial == 1){
+		// 	check_received_data(uart_dma_temp_rx);
+		// }
 		//check_received_data(uart_dma_temp_rx);
-		// µ÷ÊÔÐÅÏ¢ printf("Received data: %s\r\n", uart_dma_temp_rx);
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ printf("Received data: %s\r\n", uart_dma_temp_rx);
 		
 		//HAL_UART_Transmit_DMA(&huart1, uart_dma_temp_rx, data_length);
-		memset(uart_dma_temp_rx, 0, LENGTH);  // Çå¿ÕDMA»º³åÇø
+		memset(uart_dma_temp_rx, 0, LENGTH);  // ï¿½ï¿½ï¿½DMAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		/*
 		printf("\r\n***TEST***\r\n");
 		printf("%s\r\n",(uint8_t*)uart_dma_temp_rx);
