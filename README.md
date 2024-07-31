@@ -2,7 +2,7 @@
 
 v1.3.101
 
--   [🐸汉化组][中國语]Intellegence Hardware!~LCD show her all to u~
+-   [🐸汉化组][中國语]Intellegence Hardware!LCD show her all to u~
 -   汉化完毕！
 -   添加了字母和数字的Sample图片在uppercomputer文件夹中
 
