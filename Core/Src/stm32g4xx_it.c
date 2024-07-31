@@ -37,11 +37,8 @@
 #define LENGTH 21
 
 
-extern uint8_t layer;
-extern uint8_t target;
-extern uint8_t pattern;
+extern uint8_t function_num;
 extern uint8_t change;
-extern uint8_t func1_part;
 extern char k1,k2,k3;
 extern int func3_num;
 
@@ -69,7 +66,7 @@ void check_received_data(const uint8_t *data){
     //printf("A55AA5A5\r\n");
     // layer = 1;
     // target = 0;
-    pattern = 1;
+    function_num = 1;
     change = 1;
     k1 = 0;
     k2 = 1;
@@ -87,21 +84,21 @@ void check_received_data(const uint8_t *data){
         strcmp(number, "20221071345") == 0){
       if(strcmp(number, "20221071019") == 0){
         printf("20221071019\r\n");
-        pattern = 3;
+        function_num = 3;
         change = 1;
         func3_num = 2;
         return;
       }
       if(strcmp(number, "20221071473") == 0){
         printf("20221071473\r\n");
-        pattern = 3;
+        function_num = 3;
         change = 1;
         func3_num = 1;
         return;
       }
       if(strcmp(number, "20221071345") == 0){
         printf("20221071345\r\n");
-        pattern = 3;
+        function_num = 3;
         change = 1;
         func3_num = 3;
         return;
@@ -122,13 +119,13 @@ void check_received_data(const uint8_t *data){
 void func3_quit(const uint8_t *data){
   if (strncmp((const char *)data, "exit1", 5) == 0){
     //返回到功能界面1
-    pattern = 1;
+    function_num = 1;
     change = 1;
     return ;
   }
   if (strncmp((const char *)data, "exit2", 5) == 0){
     //返回到功能界面1
-    pattern = 2;
+    function_num = 2;
     change = 1;
     return ;
   }
@@ -370,10 +367,10 @@ void USART1_IRQHandler(void)
 		// 	check_received_data(uart_dma_temp_rx);
 		// }
     printf("Received data: %s\r\n", uart_dma_temp_rx);
-    if(pattern == 2){
+    if(function_num == 2){
 		  check_received_data(uart_dma_temp_rx);
     }
-    if(pattern == 3){
+    if(function_num == 3){
       func3_quit(uart_dma_temp_rx);
     }
 		

@@ -13,7 +13,8 @@ extern char *number_li[];
 extern uint8_t func1_part;
 extern char k1,k2,k3;
 extern int func3_num;
-
+extern int func4_num = 0;
+extern int pattern;
 
 void draw_circle(int x, int y ,int r, int color, int fill){
 	//DrawPixel(x, y, color);
@@ -42,15 +43,14 @@ void draw_frame(int x1, int y1, int x2, int y2, int color){
 ;
 void function1(){
 	// 功能界面1
-	char* menu[] = {"system of Serial Cum 1",
-		"x w l 20221071473",
-		"c r 20221071019",
-		"y m 20221071345",
-		"press key 1 to send",
-		"pattern:"
-	 };
+	char* menu[] = {"串口通信系统",
+		"徐伟凌20221071473",
+		"曹  荣20221071019",
+		"易  旻20221071345",
+		"请按键1将信息发到串口",
+		"DEFAULT"};
 
-	//sprintf(menu[5], "ģʽ%d", pattern);
+	sprintf(menu[5], "模式%d", pattern);
 	for(int i=0;i<6;i++){
 		LCD_PutString(10, 10+i*(220/6), menu[i], Black, White, 0);
 	}
@@ -75,13 +75,13 @@ void function1(){
 		break;	
 	default:
 		break;
-	}	
+	}
 
 }
 
 void function2(){
-	LCD_PutString(10, 80, "system of Serial Cum 2", Black, White, 0);
-	LCD_PutString(10, 100, "receiving data...", Black, White, 0);
+	LCD_PutString(10, 80, "串口通信系统", Black, White, 0);
+	LCD_PutString(10, 100, "正在接收串口数据", Black, White, 0);
 
 	//按键恢复
 	k1 = 1;
@@ -92,15 +92,8 @@ void function2(){
 
 
 void function3(int num){
-	//�ڶ���
-	/*
-	Ŀǰһ�ţ�xwl
-			���ţ�cr
-			���ţ�ym
-	*/
-	/*   ������ʾ��Ӧ�����ֺ�ͼƬ begin  */
-	//numΪ��Ӧ����ţ�e.g.�����numΪ1 -> xwl����xwl��ͼƬ��ѧ�ţ�����
-	LCD_PutString(10, 20, "received right data", Black, White, 0);
+
+	LCD_PutString(10, 20, "收到正确数据", Black, White, 0);
 	LCD_PutString(100, 40, name_li[num], Black, White, 0);
 	LCD_PutString(75, 60, number_li[num], Black, White, 0);
 	if (num==0) LCD_Fill_Pic(80, 100, 80, 80, gImage_xwl);
@@ -109,9 +102,33 @@ void function3(int num){
 }
 
 
-void function4(int pattern){
+void function4(){
 	/*---------------- PUT UR CODE HERE (FUNCTION4) --------------*/
-	
+	LCD_PutString(10,10,"Pattern:", Black, White, 0);
+	switch (func4_num)
+	{
+	case 0:
+		/* code */
+		printf("Function4 pattern: 0\n\r");
+		LCD_PutString(80,10,"0", Black, White, 0);
+		break;
+	case 1:
+		LCD_PutString(80,190,"1", Black, White, 0);
+		printf("KEY1 Press!\n\rA55A 20221071473 A5A5");
+		break;
+	case 2:
+		LCD_PutString(80,190,"2", Black, White, 0);
+		printf("KEY2 Press!\n\rA55A 20221071019 A5A5");
+		break;
+	case 3:
+		LCD_PutString(80,190,"3", Black, White, 0);
+		printf("KEY3 Press!\n\rA55A 20221071345 A5A5");
+		break;	
+	default:
+		break;
+	}
+
+
 	return;
 }
 	
@@ -135,6 +152,11 @@ int draw_menu(int function1_p, int nuu, int pattern){
 	{
 		/* code */
 		function3((func3_num - 1));
+	}
+	else if (pattern == 44)
+	{
+		/* code */
+		function4();
 	}
 	
 	

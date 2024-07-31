@@ -80,16 +80,15 @@ void SW_delay_ms(unsigned int time){
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint8_t layer = 0;
-uint8_t target = 0;  //  当前layer下的item
-uint8_t pattern = 0; // use for function 1 and function 4
+uint8_t function_num = 0; // use for function 1 and function 4
 uint8_t change = 0;
 uint8_t UART_temp;
 
-//uint8_t function;  // function 1 to 4  used by pattern
+//uint8_t function;  // function 1 to 4  used by function_num
 uint8_t func1_part = 0;  // parttern of func_1
 int func3_num = 0;  //功能界面3显示的学号对应序号。e.g. 如果是1，则显示xwl...
 char k1=1,k2=1,k3=1;  // 按键是否有效
+int func4_num = 0;
 
 
 
@@ -143,23 +142,11 @@ int main(void)
 	LCD_PutString(100, 160, cr, Black, White, 0);
 	LCD_PutString(100, 180, ym, Black, White, 0);
 	
-  int num = 0;
-	char str_num[2];
-	
-	char test_vals[4];
-	test_vals[0] = layer + '0';
-	test_vals[2] = target + '0';
-	
-	test_vals[3] = '\0';
-	test_vals[1] = ',';
-	
-	LCD_PutString(200, 300, test_vals, Black, White, 1);
 	
 	HAL_Delay(1000);
 	Lcd_ColorBox(0, 0, 240, 320, White);
-  pattern = 1;
-	draw_menu(func1_part, target, pattern);
-	LCD_PutString(200, 300, test_vals, Black, White, 1);
+  function_num = 1;
+	draw_menu(func1_part, 1, function_num);
   // 默认进入功能界面1
   
   /* USER CODE END 2 */
@@ -169,35 +156,11 @@ int main(void)
 
   while (1)
   {
-		/*if(HAL_UART_Receive(&huart1, &UART_temp, 1, 1) == HAL_OK){
-			HAL_UART_Transmit(&huart1, &UART_temp, 1,1);
-		}
-		hole_
-		*/
-		//printf("capptest");
-		
-		int cur_layer = layer;
-		int cur_target = target;
-
-		test_vals[0] = layer + '0';
-		test_vals[2] = target + '0';
 		if (change == 1){
 			Lcd_ColorBox(0, 0, 240, 320, White);
-			draw_menu(func1_part, target, pattern);
-			
-			LCD_PutString(200, 300, test_vals, Black, White, 1);
+			draw_menu(func1_part, 1, function_num);
 		
 		}
-		//SW_delay_ms(100);
-		/*if (ifserial){
-			num ++;
-			if (num >= 100) num = 0;
-			str_num[0] = ((int)num/10) +'0';
-			str_num[1] = '\0';
-			LCD_PutString(10, 30,"loop from 0 to 9:", Black, White, 1);
-			LCD_PutString(10, 200, str_num, Black, White, 1);
-			
-		}*/
 		change = 0;
 		HAL_Delay(100);
 		
@@ -398,7 +361,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
         return;
       }
       
-      if(pattern == 1){
+      if(function_num == 1){
         func1_part = ((func1_part + 1) > 3) ? 0 : (func1_part + 1);
         change = 1;
       }
@@ -413,8 +376,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       if (!k2){
         return;
       }
-      if(pattern == 1){
-        pattern = 2;
+      if(function_num == 1){
+        function_num = 2;
         change = 1;
         func1_part = 0;
       }
@@ -427,40 +390,21 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		HAL_Delay(5); 
 		for(uint16_t i=0;i<10000;i++) __NOP();
     if(!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6)){
-      if (!k3){
+      if(!k3){
         return;
       }
-			// switch(layer)
-			// {
-			// 	case 0:
-			// 		target = (target+1)>4? 4:target+1;
-			// 		change = 1;
-			// 		return;
-				
-			// 	case 1:
-			// 		switch(target)
-			// 		{
-			// 			case 0:
-							
-			// 				return;
-						
-			// 			case 1:
-							
-			// 				return;
-						
-			// 			case 2:
-			// 				target = 3;
-			// 				change = 1;
-			// 				return;
-						
-			// 			case 3:
-			// 				pattern = (pattern+1)%4;
-			// 				change = 1;
-			// 				return;
-			// 		}
-			// 		return;
-					
-			// }		
+
+      if(function_num != 4){
+        function_num = 4;
+        change = 1;
+      }
+      else{
+        // 功能4 0到3模式切换
+        func4_num = ((func4_num + 1) > 3) ? 0 : (func4_num + 1);
+        change = 1;
+      }
+      
+    
 			while (!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6));
 		}
 	}
