@@ -13,6 +13,7 @@ extern char *number_li[];
 extern uint8_t func1_part;
 extern char k1,k2,k3;
 extern int func3_num;
+extern int func4_num = 0;
 
 
 void draw_circle(int x, int y ,int r, int color, int fill){
@@ -75,7 +76,7 @@ void function1(){
 		break;	
 	default:
 		break;
-	}	
+	}
 
 }
 
@@ -92,14 +93,7 @@ void function2(){
 
 
 void function3(int num){
-	//�ڶ���
-	/*
-	Ŀǰһ�ţ�xwl
-			���ţ�cr
-			���ţ�ym
-	*/
-	/*   ������ʾ��Ӧ�����ֺ�ͼƬ begin  */
-	//numΪ��Ӧ����ţ�e.g.�����numΪ1 -> xwl����xwl��ͼƬ��ѧ�ţ�����
+
 	LCD_PutString(10, 20, "received right data", Black, White, 0);
 	LCD_PutString(100, 40, name_li[num], Black, White, 0);
 	LCD_PutString(75, 60, number_li[num], Black, White, 0);
@@ -109,9 +103,33 @@ void function3(int num){
 }
 
 
-void function4(int pattern){
+void function4(){
 	/*---------------- PUT UR CODE HERE (FUNCTION4) --------------*/
-	
+	LCD_PutString(10,10,"Pattern:", Black, White, 0);
+	switch (func4_num)
+	{
+	case 0:
+		/* code */
+		printf("Function4 pattern: 0\n\r");
+		LCD_PutString(80,10,"0", Black, White, 0);
+		break;
+	case 1:
+		LCD_PutString(80,190,"1", Black, White, 0);
+		printf("KEY1 Press!\n\rA55A 20221071473 A5A5");
+		break;
+	case 2:
+		LCD_PutString(80,190,"2", Black, White, 0);
+		printf("KEY2 Press!\n\rA55A 20221071019 A5A5");
+		break;
+	case 3:
+		LCD_PutString(80,190,"3", Black, White, 0);
+		printf("KEY3 Press!\n\rA55A 20221071345 A5A5");
+		break;	
+	default:
+		break;
+	}
+
+
 	return;
 }
 	
@@ -135,6 +153,11 @@ int draw_menu(int function1_p, int nuu, int pattern){
 	{
 		/* code */
 		function3((func3_num - 1));
+	}
+	else if (pattern == 44)
+	{
+		/* code */
+		function4();
 	}
 	
 	
