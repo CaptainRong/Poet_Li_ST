@@ -129,6 +129,31 @@ void function4(){
 	}
 
 
+	LCD_PutString(10,10,"Pattern:", Black, White, 0);
+	switch (func4_num)
+	{
+	case 0:
+		/* code */
+		printf("Function4 pattern: 0\n\r");
+		LCD_PutString(80,10,"0", Black, White, 0);
+		break;
+	case 1:
+		LCD_PutString(80,190,"1", Black, White, 0);
+		printf("KEY1 Press!\n\rA55A 20221071473 A5A5");
+		break;
+	case 2:
+		LCD_PutString(80,190,"2", Black, White, 0);
+		printf("KEY2 Press!\n\rA55A 20221071019 A5A5");
+		break;
+	case 3:
+		LCD_PutString(80,190,"3", Black, White, 0);
+		printf("KEY3 Press!\n\rA55A 20221071345 A5A5");
+		break;	
+	default:
+		break;
+	}
+
+
 	return;
 }
 	
