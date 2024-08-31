@@ -3,7 +3,7 @@
 <title>Static Call Graph - [G474VET6-Display\G474VET6-Display.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image G474VET6-Display\G474VET6-Display.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6220000: Last Updated: Sat Aug 31 14:14:53 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6220000: Last Updated: Sat Aug 31 20:47:55 2024
 <BR><P>
 <H3>Maximum Stack Usage =        236 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -503,13 +503,13 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
 </UL>
 
-<P><STRONG><a name="[c8]"></a>strncpy</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, strncpy.o(.text))
+<P><STRONG><a name="[c7]"></a>strncpy</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, strncpy.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = strncpy
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_received_data
 </UL>
 
-<P><STRONG><a name="[c7]"></a>strlen</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, strlen.o(.text))
+<P><STRONG><a name="[c6]"></a>strlen</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, strlen.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_received_data
 </UL>
 
@@ -520,7 +520,7 @@ Global Symbols
 <LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_received_data
 </UL>
 
-<P><STRONG><a name="[c6]"></a>strncmp</STRONG> (Thumb, 30 bytes, Stack size 12 bytes, strncmp.o(.text))
+<P><STRONG><a name="[c5]"></a>strncmp</STRONG> (Thumb, 30 bytes, Stack size 12 bytes, strncmp.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = strncmp
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_received_data
@@ -971,7 +971,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BlockWrite
 </UL>
-<BR>[Called By]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;function3
+<BR>[Called By]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;function4
+<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;function3
 </UL>
 
 <P><STRONG><a name="[b5]"></a>LCD_GPIO_Config</STRONG> (Thumb, 74 bytes, Stack size 32 bytes, lcd.o(.text.LCD_GPIO_Config))
@@ -1101,7 +1102,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_CheckIdleState
 </UL>
 
-<P><STRONG><a name="[2f]"></a>USART1_IRQHandler</STRONG> (Thumb, 252 bytes, Stack size 16 bytes, stm32g4xx_it.o(.text.USART1_IRQHandler))
+<P><STRONG><a name="[2f]"></a>USART1_IRQHandler</STRONG> (Thumb, 260 bytes, Stack size 16 bytes, stm32g4xx_it.o(.text.USART1_IRQHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = USART1_IRQHandler &rArr; check_received_data &rArr; puts &rArr; fputc &rArr; HAL_UART_Transmit
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_IRQHandler
@@ -1110,7 +1111,6 @@ Global Symbols
 <LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Receive_DMA
 <LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;memcmp
-<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;puts
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32g474xx.o(RESET)
 </UL>
@@ -1121,14 +1121,14 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32g474xx.o(RESET)
 </UL>
-<P><STRONG><a name="[c3]"></a>check_received_data</STRONG> (Thumb, 372 bytes, Stack size 24 bytes, stm32g4xx_it.o(.text.check_received_data))
+<P><STRONG><a name="[c3]"></a>check_received_data</STRONG> (Thumb, 384 bytes, Stack size 24 bytes, stm32g4xx_it.o(.text.check_received_data))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = check_received_data &rArr; puts &rArr; fputc &rArr; HAL_UART_Transmit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncmp
+<BR>[Calls]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncmp
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;memcmp
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
-<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncpy
-<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;puts
+<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncpy
+<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;puts
 </UL>
 <BR>[Called By]<UL><LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_IRQHandler
 </UL>
@@ -1149,7 +1149,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;puts
+<BR>[Called By]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;puts
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> printf3.o(i.__0printf$3)
 </UL>
@@ -1172,11 +1172,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_menu
 </UL>
 
-<P><STRONG><a name="[cc]"></a>function4</STRONG> (Thumb, 228 bytes, Stack size 24 bytes, function.o(.text.function4))
+<P><STRONG><a name="[cc]"></a>function4</STRONG> (Thumb, 424 bytes, Stack size 24 bytes, function.o(.text.function4))
 <BR><BR>[Stack]<UL><LI>Max Depth = 172<LI>Call Chain = function4 &rArr; LCD_PutString &rArr; DrawPixel &rArr; BlockWrite &rArr; Lcd_SetCursor
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_PutString
-<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;puts
+<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Fill_Pic
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_menu
 </UL>
@@ -1224,14 +1224,12 @@ Global Symbols
 
 <P><STRONG><a name="[e3]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
 
-<P><STRONG><a name="[c5]"></a>puts</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, puts.o(i.puts))
+<P><STRONG><a name="[c8]"></a>puts</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, puts.o(i.puts))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = puts &rArr; fputc &rArr; HAL_UART_Transmit
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fputc
 </UL>
-<BR>[Called By]<UL><LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_IRQHandler
-<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_received_data
-<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;function4
+<BR>[Called By]<UL><LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_received_data
 </UL>
 <P>
 <H3>

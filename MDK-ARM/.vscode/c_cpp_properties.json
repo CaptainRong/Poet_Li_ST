@@ -3,18 +3,18 @@
         {
             "name": "G474VET6-Display",
             "includePath": [
-                "e:\\altera\\G474VET6-Display\\Core\\Inc",
-                "e:\\altera\\G474VET6-Display\\Drivers\\STM32G4xx_HAL_Driver\\Inc",
-                "e:\\altera\\G474VET6-Display\\Drivers\\STM32G4xx_HAL_Driver\\Inc\\Legacy",
-                "e:\\altera\\G474VET6-Display\\Drivers\\CMSIS\\Device\\ST\\STM32G4xx\\Include",
-                "e:\\altera\\G474VET6-Display\\Drivers\\CMSIS\\Include",
-                "D:\\Users\\Captain_rong\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\include",
-                "D:\\Users\\Captain_rong\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\include\\arm_linux",
-                "D:\\Users\\Captain_rong\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\include\\arm_linux_compat",
-                "D:\\Users\\Captain_rong\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\include\\libcxx",
-                "e:\\altera\\G474VET6-Display\\MDK-ARM",
-                "e:\\altera\\G474VET6-Display\\Core\\Src",
-                "e:\\altera\\G474VET6-Display\\Drivers\\STM32G4xx_HAL_Driver\\Src"
+                "d:\\Intellegent Hardware\\Project\\Poet_Li_ST\\G474VET6-Display\\Core\\Inc",
+                "d:\\Intellegent Hardware\\Project\\Poet_Li_ST\\G474VET6-Display\\Drivers\\STM32G4xx_HAL_Driver\\Inc",
+                "d:\\Intellegent Hardware\\Project\\Poet_Li_ST\\G474VET6-Display\\Drivers\\STM32G4xx_HAL_Driver\\Inc\\Legacy",
+                "d:\\Intellegent Hardware\\Project\\Poet_Li_ST\\G474VET6-Display\\Drivers\\CMSIS\\Device\\ST\\STM32G4xx\\Include",
+                "d:\\Intellegent Hardware\\Project\\Poet_Li_ST\\G474VET6-Display\\Drivers\\CMSIS\\Include",
+                "D:\\Intellegent Hardware\\MDK\\Keil-MDK\\ARM\\ARMCLANG\\include",
+                "D:\\Intellegent Hardware\\MDK\\Keil-MDK\\ARM\\ARMCLANG\\include\\arm_linux",
+                "D:\\Intellegent Hardware\\MDK\\Keil-MDK\\ARM\\ARMCLANG\\include\\arm_linux_compat",
+                "D:\\Intellegent Hardware\\MDK\\Keil-MDK\\ARM\\ARMCLANG\\include\\libcxx",
+                "d:\\Intellegent Hardware\\Project\\Poet_Li_ST\\G474VET6-Display\\MDK-ARM",
+                "d:\\Intellegent Hardware\\Project\\Poet_Li_ST\\G474VET6-Display\\Core\\Src",
+                "d:\\Intellegent Hardware\\Project\\Poet_Li_ST\\G474VET6-Display\\Drivers\\STM32G4xx_HAL_Driver\\Src"
             ],
             "defines": [
                 "USE_HAL_DRIVER",

@@ -25,6 +25,7 @@
 #include "stdio.h"
 #include "string.h"
 #include "function.h"
+#include "LCD.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -44,9 +45,10 @@ extern uint8_t change;
 extern uint8_t func1_part;
 extern uint8_t func4_part;
 
+
 extern char k1,k2,k3;
 extern int func3_num;
-
+extern int func4_show;
 
 
 /* USER CODE END PD */
@@ -79,47 +81,54 @@ void check_received_data(const uint8_t *data){
     k3 = 0;
     return ;
   }
-  
-  if (strncmp((const char *)data, "A55A", 4) == 0 && strncmp((const char *)(data + 15), "A5A5", 4) == 0 && strlen((const char *)data) == 19)  {
-    char number[12];
-    strncpy(number, (const char *)(data + 4), 11);
-    number[11] = '\0';
+  else
+  {
 
-    if (strcmp(number, "20221071019") == 0 ||
-        strcmp(number, "20221071473") == 0 ||
-        strcmp(number, "20221071345") == 0){
-      if(strcmp(number, "20221071019") == 0){
-        printf("20221071019\r\n");
-        pattern = 3;
-        change = 1;
-        func3_num = 2;
-        return;
-      }
-      if(strcmp(number, "20221071473") == 0){
-        printf("20221071473\r\n");
-        pattern = 3;
-        change = 1;
-        func3_num = 1;
-        return;
-      }
-      if(strcmp(number, "20221071345") == 0){
-        printf("20221071345\r\n");
-        pattern = 3;
-        change = 1;
-        func3_num = 3;
-        return;
+      if (strncmp((const char *)data, "A55A", 4) == 0 && strncmp((const char *)(data + 15), "A5A5", 4) == 0 && strlen((const char *)data) == 19)  
+      {
+        char number[12];
+        strncpy(number, (const char *)(data + 4), 11);
+        number[11] = '\0';
+        func4_show = 10;
+        if (strcmp(number, "20221071019") == 0 ||
+            strcmp(number, "20221071473") == 0 ||
+            strcmp(number, "20221071345") == 0){
+              if(strcmp(number, "20221071019") == 0){
+                printf("20221071019\r\n");
+                pattern = 3;
+                change = 1;
+                func3_num = 2;
+                return;
+              }
+              if(strcmp(number, "20221071473") == 0){
+                printf("20221071473\r\n");
+                pattern = 3;
+                change = 1;
+                func3_num = 1;
+                return;
+              }
+              if(strcmp(number, "20221071345") == 0){
+            printf("20221071345\r\n");
+            pattern = 3;
+            change = 1;
+            func3_num = 3;
+            return;
+          }
+            }
+        else{
+              printf("Data Format Error!\r\n");
+              return;			
+            }
+        
       }
       
-    }
-    else{
-      printf("Data Format Error!\r\n");
-      return;			
-    }
+      else
+      {
+        printf("Data Format Error!\r\n");
+        return;
+      }	
   }
-  else{
-    printf("Data Format Error!\r\n");
-    return;
-  }		
+      	
 }
 
 void func3_quit(const uint8_t *data){
@@ -137,7 +146,13 @@ void func3_quit(const uint8_t *data){
   }
 }
 
-// void func4_ReceiveAndShow(int 1, uint8_t *data){
+
+void func4_ReceiveAndShow(uint8_t *data){
+	check_received_data(data);
+  func4_show = data[3] - '0';
+  change = 1;
+  return;
+}
 
 // }
 /* USER CODE END PFP */
@@ -377,14 +392,14 @@ void USART1_IRQHandler(void)
 		// 	check_received_data(uart_dma_temp_rx);
 		// }
     printf("Received data: %s\r\n", uart_dma_temp_rx);
-    if((pattern == 2) || (pattern == 4)){
+    if(pattern == 2){
 		  check_received_data(uart_dma_temp_rx);
     }
     if(pattern == 3){
       func3_quit(uart_dma_temp_rx);
     }
     if(pattern == 4){
-      
+      func4_ReceiveAndShow(uart_dma_temp_rx);
     }
 		
 		

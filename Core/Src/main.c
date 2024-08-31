@@ -83,8 +83,8 @@ void SW_delay_ms(unsigned int time){
 uint8_t layer = 0;
 uint8_t target = 0;  //  当前layer下的item
 
-
 uint8_t pattern = 0; // use for function 1 and function 4
+
 uint8_t change = 0;
 uint8_t UART_temp;
 
@@ -93,6 +93,7 @@ uint8_t func1_part = 0;  // parttern of func_1
 uint8_t func4_part = 3;  // parttern of func_1
 
 int func3_num = 0;  //功能界面3显示的学号对应序号�?�e.g. 如果�?1，则显示xwl...
+int func4_show = 10;
 
 char k1=1,k2=1,k3=1;  // 按键是否有效
 
@@ -193,16 +194,6 @@ int main(void)
 			LCD_PutString(200, 300, test_vals, Black, White, 1);
 		
 		}
-		//SW_delay_ms(100);
-		/*if (ifserial){
-			num ++;
-			if (num >= 100) num = 0;
-			str_num[0] = ((int)num/10) +'0';
-			str_num[1] = '\0';
-			LCD_PutString(10, 30,"loop from 0 to 9:", Black, White, 1);
-			LCD_PutString(10, 200, str_num, Black, White, 1);
-			
-		}*/
 		change = 0;
 		HAL_Delay(100);
 
