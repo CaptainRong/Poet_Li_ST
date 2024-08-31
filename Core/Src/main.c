@@ -82,13 +82,18 @@ void SW_delay_ms(unsigned int time){
 /* USER CODE BEGIN 0 */
 uint8_t layer = 0;
 uint8_t target = 0;  //  当前layer下的item
+
+
 uint8_t pattern = 0; // use for function 1 and function 4
 uint8_t change = 0;
 uint8_t UART_temp;
 
 //uint8_t function;  // function 1 to 4  used by pattern
 uint8_t func1_part = 0;  // parttern of func_1
-int func3_num = 0;  //功能界面3显示的学号对应序号。e.g. 如果是1，则显示xwl...
+uint8_t func4_part = 3;  // parttern of func_1
+
+int func3_num = 0;  //功能界面3显示的学号对应序号�?�e.g. 如果�?1，则显示xwl...
+
 char k1=1,k2=1,k3=1;  // 按键是否有效
 
 
@@ -200,6 +205,38 @@ int main(void)
 		}*/
 		change = 0;
 		HAL_Delay(100);
+
+    //模式4指示灯改变设置
+    if(pattern == 4){
+      switch (func4_part){
+        case 0:
+          /* code */
+          HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
+          HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_SET);
+          break;
+
+        case 1:
+          /* code */
+          HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
+          HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_SET);          
+          break;
+
+        case 2:
+          /* code */
+          HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
+          HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_RESET);
+          break;
+
+        case 3:
+          /* code */
+          HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
+          HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_RESET);
+          break;
+        
+        default:
+          break;
+      }
+    }
 		
 	}
 		
@@ -342,9 +379,13 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOF_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_1, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOD, LED1_Pin|LED2_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pins : PE2 PE5 PE6 */
   GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_5|GPIO_PIN_6;
@@ -366,6 +407,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : LED1_Pin LED2_Pin */
+  GPIO_InitStruct.Pin = LED1_Pin|LED2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PA8 */
   GPIO_InitStruct.Pin = GPIO_PIN_8;
@@ -418,6 +466,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
         change = 1;
         func1_part = 0;
       }
+      
 			
 			while (!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5));
 		}
@@ -430,37 +479,14 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       if (!k3){
         return;
       }
-			// switch(layer)
-			// {
-			// 	case 0:
-			// 		target = (target+1)>4? 4:target+1;
-			// 		change = 1;
-			// 		return;
-				
-			// 	case 1:
-			// 		switch(target)
-			// 		{
-			// 			case 0:
-							
-			// 				return;
-						
-			// 			case 1:
-							
-			// 				return;
-						
-			// 			case 2:
-			// 				target = 3;
-			// 				change = 1;
-			// 				return;
-						
-			// 			case 3:
-			// 				pattern = (pattern+1)%4;
-			// 				change = 1;
-			// 				return;
-			// 		}
-			// 		return;
-					
-			// }		
+      if(pattern == 1){
+        pattern = 4;
+        change = 1;       
+      }
+      if(pattern == 4){
+        func4_part = ((func4_part + 1) > 3) ? 0 : (func4_part + 1);
+        change = 1;
+      }	
 			while (!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6));
 		}
 	}

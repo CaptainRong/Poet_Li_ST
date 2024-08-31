@@ -11,6 +11,8 @@ extern const unsigned char gImage_ym[12808];
 extern char *name_li[];
 extern char *number_li[];
 extern uint8_t func1_part;
+extern uint8_t func4_part;
+
 extern char k1,k2,k3;
 extern int func3_num;
 
@@ -106,12 +108,57 @@ void function3(int num){
 	if (num==0) LCD_Fill_Pic(80, 100, 80, 80, gImage_xwl);
 	if (num==1) LCD_Fill_Pic(80, 100, 79, 80, gImage_cr);
 	if (num==2) LCD_Fill_Pic(80, 100, 80, 80, gImage_ym);
+
+	printf("k1:%d, k2:%d, k3:%d",k1, k2, k3);
 }
 
+// void func4_verify(int NumPattern){
+// 	int *list1 = [2,0,2,2,1,0,7,1,0,1,9],
+// 		*list2 = [2,0,2,2,1,0,7,1,0,1,9],
+// 		*list3 = [2,0,2,2,1,0,7,1,0,1,9];
+// 	switch (NumPattern)
+// 	{
+// 	case 1:
+// 		printf("picture A\n")
+// 		/* code */
 
-void function4(int pattern){
-	/*---------------- PUT UR CODE HERE (FUNCTION4) --------------*/
+// 		break;
 	
+// 	default:
+// 		break;
+// 	}
+// }
+
+void function4(){
+	/*---------------- PUT UR CODE HERE (FUNCTION4) --------------*/
+	LCD_PutString(10, 20, "func 4", Black, White, 0);
+	LCD_PutString(10, 70, "receiving data...", Black, White, 0);
+
+	LCD_PutString(10,300,"pattern", Black, White, 0);
+	switch (func4_part)
+	{
+	case 0:
+		/* code */
+		printf("Null\n");
+		LCD_PutString(10,100,"", Black, White, 0);
+		LCD_PutString(70,300,"0", Black, White, 0);
+		break;
+	case 1:
+		printf("picture A\n");
+		LCD_PutString(80,300,"1", Black, White, 0);
+		break;
+	case 2:
+		printf("picture B\n");
+		LCD_PutString(80,300,"2", Black, White, 0);
+		break;
+	case 3:
+		printf("picture C\n");
+		LCD_PutString(80,300,"3", Black, White, 0);	
+			
+		break;	
+	default:
+		break;
+	}
 	return;
 }
 	
@@ -135,6 +182,10 @@ int draw_menu(int function1_p, int nuu, int pattern){
 	{
 		/* code */
 		function3((func3_num - 1));
+	}
+	else if (pattern == 4)
+	{
+		function4();
 	}
 	
 	

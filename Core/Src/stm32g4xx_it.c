@@ -42,8 +42,11 @@ extern uint8_t target;
 extern uint8_t pattern;
 extern uint8_t change;
 extern uint8_t func1_part;
+extern uint8_t func4_part;
+
 extern char k1,k2,k3;
 extern int func3_num;
+
 
 
 /* USER CODE END PD */
@@ -121,18 +124,22 @@ void check_received_data(const uint8_t *data){
 
 void func3_quit(const uint8_t *data){
   if (strncmp((const char *)data, "exit1", 5) == 0){
-    //返回到功能界面1
+    //返回到功能界�?1
     pattern = 1;
     change = 1;
     return ;
   }
   if (strncmp((const char *)data, "exit2", 5) == 0){
-    //返回到功能界面1
+    //返回到功能界�?1
     pattern = 2;
     change = 1;
     return ;
   }
 }
+
+// void func4_ReceiveAndShow(int 1, uint8_t *data){
+
+// }
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -356,7 +363,7 @@ void EXTI9_5_IRQHandler(void)
 void USART1_IRQHandler(void)
 {
   /* USER CODE BEGIN USART1_IRQn 0 */
-	if(__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE))  //进入了中断
+	if(__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE))  //进入了中�?
   {
 		__HAL_UART_CLEAR_IDLEFLAG(&huart1);
 		HAL_UART_DMAStop(&huart1);
@@ -370,11 +377,14 @@ void USART1_IRQHandler(void)
 		// 	check_received_data(uart_dma_temp_rx);
 		// }
     printf("Received data: %s\r\n", uart_dma_temp_rx);
-    if(pattern == 2){
+    if((pattern == 2) || (pattern == 4)){
 		  check_received_data(uart_dma_temp_rx);
     }
     if(pattern == 3){
       func3_quit(uart_dma_temp_rx);
+    }
+    if(pattern == 4){
+      
     }
 		
 		
