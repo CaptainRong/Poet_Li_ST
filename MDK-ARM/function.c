@@ -60,12 +60,12 @@ void draw_frame(int x1, int y1, int x2, int y2, int color){
 ;
 void function1(){
 	// 功能界面1
-	char* menu[] = {"串口通信系统",
-		"徐伟凌20221071473",
-		"曹荣20221071019",
-		"易旻20221071345",
-		"请按键1将信息发送到串口",
-		"模式:"
+	char* menu[] = {"����ͨ��ϵͳ",
+		"��ΰ��20221071473",
+		"��  ��20221071019",
+		"��  �F20221071345",
+		"�밴��1����Ϣ��������",
+		"ģʽ:"
 	 };
 
 	//sprintf(menu[5], "ģʽ%d", pattern);
@@ -98,10 +98,10 @@ void function1(){
 }
 
 void function2(){
-	LCD_PutString(10, 80, "串口通信系统", Black, White, 0);
-	LCD_PutString(10, 100, "正在接收串口数据", Black, White, 0);
+	LCD_PutString(10, 80, "����ͨ��ϵͳ", Black, White, 0);
+	LCD_PutString(10, 100, "���ڽ��մ�������", Black, White, 0);
 
-	//按键恢复
+	//按键恢�??
 	k1 = 1;
     k2 = 1;
     k3 = 1;
@@ -118,7 +118,7 @@ void function3(int num){
 	*/
 	/*   ������ʾ��Ӧ�����ֺ�ͼƬ begin  */
 	//numΪ��Ӧ����ţ�e.g.�����numΪ1 -> xwl����xwl��ͼƬ��ѧ�ţ�����
-	LCD_PutString(10, 20, "收到正确数据", Black, White, 0);
+	LCD_PutString(10, 20, "�յ���ȷ����", Black, White, 0);
 	LCD_PutString(100, 40, name_li[num], Black, White, 0);
 	LCD_PutString(75, 60, number_li[num], Black, White, 0);
 	if (num==0) LCD_Fill_Pic(80, 100, 80, 80, gImage_xwl);
@@ -147,9 +147,9 @@ void function3(int num){
 
 void function4(){
 	/*---------------- PUT UR CODE HERE (FUNCTION4) --------------*/
-	LCD_PutString(10, 70, "正在接受数据...", Black, White, 0);
+	LCD_PutString(10, 70, "���ڽ�������...", Black, White, 0);
 	
-	LCD_PutString(10,300,"模式", Black, White, 0);
+	LCD_PutString(10,300,"ģʽ", Black, White, 0);
 	
 	if (func4_show == 10){
 		switch (func4_part){
@@ -219,13 +219,13 @@ void function4(){
 
 int draw_menu(int function1_p, int nuu, int pattern){
 	/* 
-		function1_p: 功能界面1的模式，0到3
-		nuu ： 暂时用不到的变量，又不想大范围改，写完再说吧
+		function1_p: 功能界面1的模式，0�?3
+		nuu �? 暂时用不到的变量，又不想大范围改，写完再说吧
 	 */
 	//ToDo 如果最后nuu用不上，就删了吧
 		
 	if(pattern == 1){
-		//功能界面1的展示
+		//功能界面1的展�?
 		function1();
 	}
 	else if (pattern == 2)

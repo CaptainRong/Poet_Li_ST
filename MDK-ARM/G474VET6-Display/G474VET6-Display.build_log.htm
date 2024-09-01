@@ -21,24 +21,41 @@ Target DLL:      CMSIS_AGDI.dll V1.33.18.0
 Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
-D:\Intellegent Hardware\Project\Poet_Li_ST\G474VET6-Display\MDK-ARM\G474VET6-Display.uvprojx
+d:\Intellegent Hardware\Project\Poet_Li_ST\G474VET6-Display\MDK-ARM\G474VET6-Display.uvprojx
 Project File Date:  08/31/2024
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.22', folder: 'D:\Intellegent Hardware\MDK\Keil-MDK\ARM\ARMCLANG\Bin'
-Rebuild target 'G474VET6-Display'
-assembling startup_stm32g474xx.s...
-compiling stm32g4xx_hal_msp.c...
-compiling main.c...
-compiling stm32g4xx_hal_tim_ex.c...
-compiling stm32g4xx_hal_uart_ex.c...
-compiling stm32g4xx_hal_tim.c...
-compiling stm32g4xx_it.c...
-compiling stm32g4xx_hal.c...
+Build target 'G474VET6-Display'
+function.c(63): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+   63 |         char* menu[] = {"<B4><AE><BF><DA>ͨ<D0><C5>ϵͳ",
+      |                          ^~~~~~~~~~~~~~~~~~~~~~~~
+function.c(64): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+   64 |                 "<D0><EC>ΰ<C1><E8>20221071473",
+      |                  ^~~~~~~~ ~~~~~~~~
+function.c(65): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+   65 |                 "<B2><DC>  <C8><D9>20221071019",
+      |                  ^~~~~~~~  ~~~~~~~~
+function.c(66): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+   66 |                 "<D2><D7>  <95>F20221071345",
+      |                  ^~~~~~~~  ~~~~
+function.c(67): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+   67 |                 "<C7>밴<BC><FC>1<BD><AB><D0><C5>Ϣ<B7><A2><B5><BD><B4><AE><BF><DA>",
+      |                  ^~~~  ~~~~~~~~ ~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+function.c(101): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+  101 |         LCD_PutString(10, 80, "<B4><AE><BF><DA>ͨ<D0><C5>ϵͳ", Black, White, 0);
+      |                                ^~~~~~~~~~~~~~~~~~~~~~~~
+function.c(102): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+  102 |         LCD_PutString(10, 100, "<D5><FD><D4>ڽ<D3><CA>մ<AE><BF><DA><CA><FD><BE><DD>", Black, White, 0);
+      |                                 ^~~~~~~~~~~~ ~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+function.c(121): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+  121 |         LCD_PutString(10, 20, "<CA>յ<BD><D5><FD>ȷ<CA><FD><BE><DD>", Black, White, 0);
+      |                                ^~~~ ~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~
+function.c(150): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+  150 |         LCD_PutString(10, 70, "<D5><FD><D4>ڽ<D3><CA><D5><CA><FD><BE><DD>...", Black, White, 0);
+      |                                ^~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+9 warnings generated.
 compiling function.c...
-compiling stm32g4xx_hal_pwr_ex.c...
-compiling stm32g4xx_hal_rcc.c...
-compiling stm32g4xx_hal_rcc_ex.c...
 ../Core/Src/LCD.c(5): warning: In file included from...
 ../Core/Inc\GB1616.h(14): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
    14 | "<D0><EC>", 0x10,0x40,0x10,0x40,0x20,0xA0,0x41,0x10,
@@ -100,34 +117,18 @@ compiling stm32g4xx_hal_rcc_ex.c...
 ../Core/Inc\GB1616.h(144): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
   144 | "<BE><DD>", 0x20,0x00,0x23,0xFC,0x22,0x04,0x22,0x04,
       |  ^~~~~~~~
-20 warnings generated.
+../Core/Inc\GB1616.h(159): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+  159 | "<D4><DA>", 0x02,0x00,0x02,0x00,0x04,0x00,0xFF,0xFE,
+      |  ^~~~~~~~
+../Core/Inc\GB1616.h(164): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+  164 | "<BD><D3>", 0x10,0x80,0x10,0x40,0x13,0xFC,0x10,0x00,
+      |  ^~~~~~~~
+22 warnings generated.
 compiling LCD.c...
-compiling stm32g4xx_hal_flash.c...
-compiling stm32g4xx_hal_flash_ramfunc.c...
-compiling stm32g4xx_hal_uart.c...
-compiling stm32g4xx_hal_flash_ex.c...
-compiling stm32g4xx_hal_gpio.c...
-compiling stm32g4xx_hal_exti.c...
-Pic.c(21443): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
- 21443 | char xwl[] = "<D0><EC>ΰ<C1><E8>";
-       |               ^~~~~~~~ ~~~~~~~~
-Pic.c(21445): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
- 21445 | char cr[] = "<B2><DC><C8><D9>";
-       |              ^~~~~~~~~~~~~~~~
-Pic.c(21447): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
- 21447 | char ym[] = "<D2>וF";
-       |              ^~~~
-3 warnings generated.
-compiling Pic.c...
-compiling stm32g4xx_hal_dma_ex.c...
-compiling stm32g4xx_hal_pwr.c...
-compiling stm32g4xx_hal_cortex.c...
-compiling stm32g4xx_hal_dma.c...
-compiling system_stm32g4xx.c...
 linking...
-Program Size: Code=18336 RO-data=332832 RW-data=68 ZI-data=1404  
+Program Size: Code=18324 RO-data=332940 RW-data=68 ZI-data=1404  
 FromELF: creating hex file...
-"G474VET6-Display\G474VET6-Display.axf" - 0 Error(s), 23 Warning(s).
+"G474VET6-Display\G474VET6-Display.axf" - 0 Error(s), 31 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -150,7 +151,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE@6.1.0
-Build Time Elapsed:  00:00:07
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>
