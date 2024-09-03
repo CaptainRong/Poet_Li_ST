@@ -29,6 +29,7 @@
 #define LENGTH 19 
 
 extern char xwl[], cr[], ym[];
+extern int func4_show;
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -92,10 +93,10 @@ uint8_t UART_temp;
 uint8_t func1_part = 0;  // parttern of func_1
 uint8_t func4_part = 3;  // parttern of func_1
 
-int func3_num = 0;  //功能界面3显示的学号对应序号�?�e.g. 如果�?1，则显示xwl...
+int func3_num = 0;  //功能界面3显示的�?�号对应序号�??�e.g. 如果�??1，则显示xwl...
 int func4_show = 10;
 
-char k1=1,k2=1,k3=1;  // 按键是否有效
+char k1=1,k2=1,k3=1;  // 按键�?否有�?
 
 
 
@@ -166,7 +167,7 @@ int main(void)
   pattern = 1;
 	draw_menu(func1_part, target, pattern);
 	LCD_PutString(200, 300, test_vals, Black, White, 1);
-  // 默认进入功能界面1
+  // 默�?�进入功能界�?1
   
   /* USER CODE END 2 */
 
@@ -197,7 +198,7 @@ int main(void)
 		change = 0;
 		HAL_Delay(100);
 
-    //模式4指示灯改变设置
+    //模式4指示�?改变设置
     if(pattern == 4){
       switch (func4_part){
         case 0:
@@ -464,13 +465,14 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 	}
 	else if (GPIO_Pin == GPIO_PIN_6) // KEY3
 	{
+    func4_show = 10;
 		HAL_Delay(5); 
 		for(uint16_t i=0;i<10000;i++) __NOP();
     if(!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6)){
       if (!k3){
         return;
       }
-      if(pattern == 1){
+      if(pattern != 4){
         pattern = 4;
         change = 1;       
       }

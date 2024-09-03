@@ -27,108 +27,11 @@ Project File Date:  08/31/2024
 <h2>Output:</h2>
 *** Using Compiler 'V6.22', folder: 'D:\Intellegent Hardware\MDK\Keil-MDK\ARM\ARMCLANG\Bin'
 Build target 'G474VET6-Display'
-function.c(63): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   63 |         char* menu[] = {"<B4><AE><BF><DA>ͨ<D0><C5>ϵͳ",
-      |                          ^~~~~~~~~~~~~~~~~~~~~~~~
-function.c(64): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   64 |                 "<D0><EC>ΰ<C1><E8>20221071473",
-      |                  ^~~~~~~~ ~~~~~~~~
-function.c(65): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   65 |                 "<B2><DC>  <C8><D9>20221071019",
-      |                  ^~~~~~~~  ~~~~~~~~
-function.c(66): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   66 |                 "<D2><D7>  <95>F20221071345",
-      |                  ^~~~~~~~  ~~~~
-function.c(67): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   67 |                 "<C7>밴<BC><FC>1<BD><AB><D0><C5>Ϣ<B7><A2><B5><BD><B4><AE><BF><DA>",
-      |                  ^~~~  ~~~~~~~~ ~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-function.c(101): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-  101 |         LCD_PutString(10, 80, "<B4><AE><BF><DA>ͨ<D0><C5>ϵͳ", Black, White, 0);
-      |                                ^~~~~~~~~~~~~~~~~~~~~~~~
-function.c(102): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-  102 |         LCD_PutString(10, 100, "<D5><FD><D4>ڽ<D3><CA>մ<AE><BF><DA><CA><FD><BE><DD>", Black, White, 0);
-      |                                 ^~~~~~~~~~~~ ~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-function.c(121): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-  121 |         LCD_PutString(10, 20, "<CA>յ<BD><D5><FD>ȷ<CA><FD><BE><DD>", Black, White, 0);
-      |                                ^~~~ ~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~
-function.c(150): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-  150 |         LCD_PutString(10, 70, "<D5><FD><D4>ڽ<D3><CA><D5><CA><FD><BE><DD>...", Black, White, 0);
-      |                                ^~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-9 warnings generated.
-compiling function.c...
-../Core/Src/LCD.c(5): warning: In file included from...
-../Core/Inc\GB1616.h(14): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   14 | "<D0><EC>", 0x10,0x40,0x10,0x40,0x20,0xA0,0x41,0x10,
-      |  ^~~~~~~~
-../Core/Inc\GB1616.h(24): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   24 | "<C1><E8>", 0x00,0x40,0x40,0x40,0x23,0xF8,0x20,0x40,
-      |  ^~~~~~~~
-../Core/Inc\GB1616.h(29): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   29 | "<B2><DC>", 0x04,0x40,0x04,0x40,0xFF,0xFE,0x04,0x40,
-      |  ^~~~~~~~
-../Core/Inc\GB1616.h(34): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   34 | "<C8><D9>", 0x08,0x20,0x08,0x20,0xFF,0xFE,0x08,0x20,
-      |  ^~~~~~~~
-../Core/Inc\GB1616.h(39): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   39 | "<D2><D7>", 0x0F,0xF0,0x08,0x10,0x08,0x10,0x0F,0xF0,
-      |  ^~~~~~~~
-../Core/Inc\GB1616.h(44): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   44 | "<95>F", 0x1F,0xF0,0x10,0x10,0x10,0x10,0x1F,0xF0,
-      |  ^~~~
-../Core/Inc\GB1616.h(49): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   49 | "<B4><AE>", 0x01,0x00,0x01,0x00,0x3F,0xF8,0x21,0x08,
-      |  ^~~~~~~~
-../Core/Inc\GB1616.h(54): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   54 | "<BF><DA>", 0x00,0x00,0x00,0x00,0x3F,0xF8,0x20,0x08,
-      |  ^~~~~~~~
-../Core/Inc\GB1616.h(64): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   64 | "<D0><C5>", 0x08,0x40,0x08,0x20,0x0B,0xFE,0x10,0x00,
-      |  ^~~~~~~~
-../Core/Inc\GB1616.h(69): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   69 | "<D1><DD>", 0x00,0x80,0x20,0x40,0x17,0xFC,0x14,0x04,
-      |  ^~~~~~~~
-../Core/Inc\GB1616.h(89): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   89 | "<C7><EB>", 0x00,0x40,0x40,0x40,0x27,0xFC,0x20,0x40,
-      |  ^~~~~~~~
-../Core/Inc\GB1616.h(94): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   94 | "<BD><AB>", 0x08,0x80,0x08,0xF8,0x09,0x08,0x4A,0x10,
-      |  ^~~~~~~~
-../Core/Inc\GB1616.h(99): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-   99 | "<B0><B4>", 0x10,0x40,0x10,0x20,0x10,0x20,0x13,0xFE,
-      |  ^~~~~~~~
-../Core/Inc\GB1616.h(104): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-  104 | "<BC><FC>", 0x20,0x10,0x20,0x10,0x3B,0x7C,0x21,0x14,
-      |  ^~~~~~~~
-../Core/Inc\GB1616.h(114): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-  114 | "<B7><A2>", 0x01,0x00,0x11,0x10,0x11,0x08,0x22,0x00,
-      |  ^~~~~~~~
-../Core/Inc\GB1616.h(119): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-  119 | "<B5><BD>", 0x00,0x04,0xFF,0x84,0x08,0x04,0x10,0x24,
-      |  ^~~~~~~~
-../Core/Inc\GB1616.h(124): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-  124 | "<CA><D5>", 0x08,0x40,0x08,0x40,0x48,0x40,0x48,0x80,
-      |  ^~~~~~~~
-../Core/Inc\GB1616.h(129): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-  129 | "<D5><FD>", 0x00,0x00,0x7F,0xFC,0x01,0x00,0x01,0x00,
-      |  ^~~~~~~~
-../Core/Inc\GB1616.h(139): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-  139 | "<CA><FD>", 0x08,0x20,0x49,0x20,0x2A,0x20,0x08,0x3E,
-      |  ^~~~~~~~
-../Core/Inc\GB1616.h(144): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-  144 | "<BE><DD>", 0x20,0x00,0x23,0xFC,0x22,0x04,0x22,0x04,
-      |  ^~~~~~~~
-../Core/Inc\GB1616.h(159): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-  159 | "<D4><DA>", 0x02,0x00,0x02,0x00,0x04,0x00,0xFF,0xFE,
-      |  ^~~~~~~~
-../Core/Inc\GB1616.h(164): warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-  164 | "<BD><D3>", 0x10,0x80,0x10,0x40,0x13,0xFC,0x10,0x00,
-      |  ^~~~~~~~
-22 warnings generated.
-compiling LCD.c...
+compiling main.c...
 linking...
-Program Size: Code=18324 RO-data=332940 RW-data=68 ZI-data=1404  
+Program Size: Code=18336 RO-data=332940 RW-data=68 ZI-data=1404  
 FromELF: creating hex file...
-"G474VET6-Display\G474VET6-Display.axf" - 0 Error(s), 31 Warning(s).
+"G474VET6-Display\G474VET6-Display.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -151,7 +54,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE@6.1.0
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>
